@@ -1,0 +1,6 @@
+# Local development only — Modal containers install their own deps (see modal_app.py images).
+modal
+fastapi[standard]
+jinja2
+jsonschema
+requests

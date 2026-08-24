@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}{{ concept.name }}{% endblock %}
+{% block content %}
+<p class="crumb"><a href="../">← All concepts</a></p>
+<h1>{{ concept.name }}
+  <span class="pill s-{{ concept.status }}">{{ concept.status }}</span></h1>
+{% if concept.aliases %}<p class="aliases">Also known as: {{ concept.aliases|join(', ') }}</p>{% endif %}
+<p class="date">Initiated {{ concept.initiated.date }} · mentioned in
+{{ concept.n_meetings }} meeting{{ 's' if concept.n_meetings != 1 }}</p>
+
+<h2>Timeline</h2>
+<div class="timeline" aria-label="Concept timeline across meetings">
+  {% for cell in cells %}
+  <div class="tl-cell{% if cell.mentions %} hit{% endif %}">
+    <div class="tl-marks">
+      {% if cell.initiated %}<span class="tl-init" title="Initiated here">▲</span>{% endif %}
+      {% for m in cell.mentions %}<span class="tl-dot d-{{ m.depth }}" title="{{ m.depth }}"></span>{% endfor %}
+    </div>
+    <a class="tl-date" href="{{ root }}meetings/{{ cell.meeting.slug }}/">{{ cell.meeting.date }}</a>
+  </div>
+  {% endfor %}
+</div>
+<div class="statusband s-{{ concept.status }}">Current status: {{ concept.status }}</div>
+<p class="legend"><span class="tl-dot d-passing"></span> passing ·
+<span class="tl-dot d-discussed"></span> discussed ·
+<span class="tl-dot d-deep-dive"></span> deep-dive · ▲ initiated</p>
+
+<h2>Mentions</h2>
+{% for cell in cells if cell.mentions %}
+<div class="mention">
+  <h3><a href="{{ root }}meetings/{{ cell.meeting.slug }}/">{{ cell.meeting.title }}</a>
+      <span class="date">{{ cell.meeting.date }}</span></h3>
+  {% for m in cell.mentions %}
+  <blockquote>“{{ m.snippet }}” <span class="depth">({{ m.depth }})</span></blockquote>
+  {% endfor %}
+</div>
+{% endfor %}
+{% endblock %}

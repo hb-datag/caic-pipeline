@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}{{ meeting.title }}{% endblock %}
+{% block content %}
+<p class="crumb"><a href="{{ root }}">← All meetings</a></p>
+<h1>{{ meeting.title }}</h1>
+<p class="date">{{ meeting.date }}</p>
+
+{% if youtube_url %}
+<div class="video"><iframe src="{{ youtube_url }}" title="Meeting recording"
+  allowfullscreen loading="lazy"></iframe></div>
+{% else %}
+<p class="soon">🎬 The video recording will appear here once published.</p>
+{% endif %}
+
+<section>
+  <h2>Recap</h2>
+  {% for para in analysis.summary.split('\n\n') %}<p>{{ para }}</p>{% endfor %}
+</section>
+
+<section>
+  <h2>Key points</h2>
+  <ul class="keypoints">
+  {% for kp in analysis.key_points %}
+    <li>{% if kp.timestamp %}<span class="ts">{{ kp.timestamp }}</span> {% endif %}{{ kp.text }}</li>
+  {% endfor %}
+  </ul>
+</section>
+
+{% if analysis.decisions %}
+<section>
+  <h2>Decisions</h2>
+  <ul>{% for d in analysis.decisions %}<li>{{ d }}</li>{% endfor %}</ul>
+</section>
+{% endif %}
+
+{% if analysis.action_items %}
+<section>
+  <h2>Action items</h2>
+  <ul class="actions">
+  {% for a in analysis.action_items %}
+    <li>{{ a.text }}{% if a.owner %} <span class="owner">— {{ a.owner }}</span>{% endif %}</li>
+  {% endfor %}
+  </ul>
+</section>
+{% endif %}
+
+{% if analysis.chapters %}
+<section>
+  <h2>Chapters</h2>
+  <ul class="chapters">
+  {% for c in analysis.chapters %}<li><span class="ts">{{ c.start }}</span> {{ c.title }}</li>{% endfor %}
+  </ul>
+</section>
+{% endif %}
+{% endblock %}

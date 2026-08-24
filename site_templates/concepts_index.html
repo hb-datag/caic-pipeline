@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Concept Tracker{% endblock %}
+{% block content %}
+<h1>Concept Tracker</h1>
+<p class="lede">Every concept CAIC is developing, tracked across meetings.
+Click a column to sort, a row for the full timeline.</p>
+{% if not concepts %}<p>No concepts tracked yet.</p>{% endif %}
+<div class="tablewrap">
+<table id="ct">
+  <thead><tr>
+    <th data-k="name">Concept</th>
+    <th data-k="status">Status</th>
+    <th data-k="first">First seen</th>
+    <th data-k="last">Last mention</th>
+    <th data-k="n" class="num">Meetings</th>
+  </tr></thead>
+  <tbody>
+  {% for c in concepts %}
+    <tr data-href="{{ c.slug }}/"
+        data-name="{{ c.name|lower }}" data-status="{{ c.status }}"
+        data-first="{{ c.first_date }}" data-last="{{ c.last_date }}" data-n="{{ c.n_meetings }}">
+      <td><a href="{{ c.slug }}/">{{ c.name }}</a></td>
+      <td><span class="pill s-{{ c.status }}">{{ c.status }}</span></td>
+      <td>{{ c.first_date }}</td>
+      <td>{{ c.last_date }}</td>
+      <td class="num">{{ c.n_meetings }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+<script>
+(function(){
+  var tb=document.querySelector('#ct tbody'), dir={};
+  document.querySelectorAll('#ct th').forEach(function(th){
+    th.onclick=function(){
+      var k=th.dataset.k; dir[k]=!dir[k];
+      Array.prototype.slice.call(tb.rows).sort(function(a,b){
+        var x=a.dataset[k]||'', y=b.dataset[k]||'';
+        if(k==='n'){x=+x;y=+y;}
+        return (x<y?-1:x>y?1:0)*(dir[k]?1:-1);
+      }).forEach(function(r){tb.appendChild(r);});
+    };
+  });
+})();
+</script>
+{% endblock %}

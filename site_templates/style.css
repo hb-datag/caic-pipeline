@@ -1,0 +1,94 @@
+/* CAIC public site — palette sampled from cincinnatiaicatalyst.org */
+:root{
+  --blue:#1b5a7d; --navy:#0f3a54; --blue-soft:#2d6f94;
+  --accent:#6aa9cc; --bg:#dfe6eb; --ink:#22333c; --muted:#5a707e;
+  --card:#ffffff; --line:#c9d5dd;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Montserrat,"Segoe UI",system-ui,sans-serif;
+     background:var(--bg);color:var(--ink);line-height:1.6}
+.wrap{max-width:900px;margin:0 auto;padding:0 1.25rem}
+a{color:var(--blue)}
+
+header{background:var(--blue);border-bottom:4px solid var(--accent)}
+.bar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;
+     padding-top:.8rem;padding-bottom:.8rem;gap:.5rem}
+.brand{color:#fff;text-decoration:none;font-size:1.05rem;letter-spacing:.02em}
+.brand strong{color:#cfe0ec}
+nav a{color:#e6eef4;text-decoration:none;margin-left:1.2rem;font-size:.9rem;font-weight:600}
+nav a:hover{color:#fff;text-decoration:underline}
+
+main{padding:1.5rem 1.25rem 3rem}
+h1{color:var(--navy);font-size:1.7rem;line-height:1.25;margin:.8rem 0 .3rem}
+h2{color:var(--blue);font-size:1.15rem;margin:1.6rem 0 .5rem}
+.lede{color:var(--muted);margin-top:0}
+.date{color:var(--muted);font-size:.85rem}
+.crumb{font-size:.85rem;margin:.8rem 0 0}
+.soon{background:#eef3f6;border:1px dashed var(--line);border-radius:8px;
+      padding:.8rem 1rem;color:var(--muted)}
+
+.cards{display:grid;gap:1rem;margin-top:1.2rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;
+      padding:1.1rem 1.25rem;text-decoration:none;color:inherit;display:block;
+      box-shadow:0 1px 3px rgba(15,58,84,.10)}
+.card h2{margin:.2rem 0 .35rem}
+.card p{margin:0;color:var(--muted);font-size:.92rem}
+.card .more{font-size:.85rem;font-weight:600;color:var(--blue)}
+.card:hover{border-color:var(--accent)}
+
+.video{position:relative;padding-top:56.25%;margin:1rem 0;border-radius:10px;overflow:hidden}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+.keypoints li,.chapters li{margin:.35rem 0}
+.ts{font-family:Consolas,monospace;font-size:.8rem;background:#eef3f6;
+    border-radius:4px;padding:.05rem .35rem;color:var(--blue)}
+.owner{color:var(--muted)}
+
+/* concept table */
+.tablewrap{overflow-x:auto;background:var(--card);border:1px solid var(--line);
+           border-radius:10px;margin-top:1rem}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+th,td{text-align:left;padding:.6rem .9rem;border-bottom:1px solid var(--line)}
+th{background:#eef3f6;color:var(--navy);cursor:pointer;user-select:none;white-space:nowrap}
+th:hover{background:#e2eaf0}
+tr:last-child td{border-bottom:0}
+.num{text-align:right}
+
+.pill{display:inline-block;font-size:.72rem;font-weight:700;padding:.15rem .6rem;
+      border-radius:999px;color:#fff;vertical-align:middle}
+.s-proposed{background:#8a9aa5}
+.s-active{background:var(--blue)}
+.s-growing{background:#3d8b5f}
+.s-dormant{background:#b07a1a}
+.s-completed{background:var(--navy)}
+
+/* concept timeline */
+.timeline{display:flex;gap:.4rem;overflow-x:auto;padding:1rem .2rem .4rem;
+          background:var(--card);border:1px solid var(--line);border-radius:10px 10px 0 0}
+.tl-cell{min-width:86px;text-align:center;padding:.4rem .2rem;border-radius:6px}
+.tl-cell.hit{background:#eef3f6}
+.tl-marks{min-height:1.6rem;display:flex;align-items:center;justify-content:center;gap:.25rem}
+.tl-init{color:var(--navy);font-size:.9rem}
+.tl-dot{display:inline-block;border-radius:50%;background:var(--accent)}
+.d-passing{width:8px;height:8px;background:#9cc5dd}
+.d-discussed{width:12px;height:12px;background:var(--blue-soft)}
+.d-deep-dive{width:16px;height:16px;background:var(--navy)}
+.tl-date{display:block;font-size:.7rem;color:var(--muted);margin-top:.3rem;
+         text-decoration:none;white-space:nowrap}
+.statusband{border-radius:0 0 10px 10px;padding:.4rem .9rem;color:#fff;
+            font-size:.8rem;font-weight:600}
+.legend{font-size:.78rem;color:var(--muted)}
+.legend .tl-dot{vertical-align:middle}
+.aliases{color:var(--muted);font-size:.9rem}
+
+.mention{background:var(--card);border:1px solid var(--line);border-radius:10px;
+         padding:.8rem 1.1rem;margin:.8rem 0}
+.mention h3{margin:.1rem 0 .3rem;font-size:1rem}
+.mention h3 a{text-decoration:none;color:var(--navy)}
+.mention blockquote{margin:.3rem 0;color:var(--ink);font-style:italic;
+                    border-left:3px solid var(--accent);padding-left:.7rem}
+.depth{color:var(--muted);font-size:.8rem;font-style:normal}
+
+footer{border-top:1px solid var(--line);padding:1rem 0 2rem;margin-top:2rem;
+       color:var(--muted);font-size:.8rem}
+@media (max-width:600px){ nav a{margin-left:.8rem} h1{font-size:1.35rem} }

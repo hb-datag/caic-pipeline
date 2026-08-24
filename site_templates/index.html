@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Meetings{% endblock %}
+{% block content %}
+<h1>Meetings</h1>
+<p class="lede">Recaps, decisions, and action items from every CAIC meeting.</p>
+{% if not meetings %}
+<p>No meetings published yet.</p>
+{% endif %}
+<div class="cards">
+{% for m in meetings %}
+  <a class="card meeting-card" href="meetings/{{ m.slug }}/">
+    <span class="date">{{ m.date }}</span>
+    <h2>{{ m.title }}</h2>
+    <p>{{ m.summary_short }}</p>
+    <span class="more">Read the recap →</span>
+  </a>
+{% endfor %}
+</div>
+{% endblock %}

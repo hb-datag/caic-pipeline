@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CAIC Pipeline</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  /* CAIC brand palette — sampled from cincinnatiaicatalyst.org */
+  :root{
+    --teal:#1b5a7d;       /* primary CAIC blue (header, buttons) */
+    --teal-deep:#0f3a54;  /* deep navy */
+    --teal-soft:#2d6f94;  /* hover / soft blue */
+    --gold:#6aa9cc;       /* light-blue accent (borders, active states) */
+    --gold-soft:#9cc5dd;  /* lighter accent */
+    --paper:#dfe6eb;      /* light blue-gray page background */
+    --ink:#22333c; --ok:#3d8b5f; --warn:#b07a1a; --err:#b0402e;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Montserrat,"Segoe UI",system-ui,sans-serif;background:var(--paper);color:var(--ink)}
+  header{background:var(--teal);color:#fff;padding:1rem 1.25rem;border-bottom:4px solid var(--gold)}
+  header h1{margin:0;font-size:1.15rem;font-weight:600;letter-spacing:.03em}
+  header h1 span{color:var(--gold-soft)}
+  header p{margin:.15rem 0 0;font-size:.8rem;opacity:.75}
+  main{max-width:680px;margin:0 auto;padding:1.25rem}
+  .card{background:#fff;border:1px solid #c9d5dd;border-radius:10px;padding:1.25rem;margin-bottom:1.25rem;
+        box-shadow:0 1px 3px rgba(15,58,84,.10)}
+  .card h2{margin:0 0 1rem;font-size:1rem;color:var(--teal);border-bottom:2px solid var(--gold);
+           display:inline-block;padding-bottom:.25rem}
+  label{display:block;font-size:.8rem;font-weight:600;color:var(--teal-soft);margin:.9rem 0 .3rem}
+  input[type=text],input[type=date],input[type=password],textarea{
+    width:100%;padding:.55rem .7rem;border:1px solid #b6c6d1;border-radius:6px;font:inherit;background:#fbfcfd}
+  input:focus,textarea:focus{outline:2px solid var(--gold);border-color:var(--gold)}
+  textarea{min-height:120px;resize:vertical}
+  input[type=file]{font-size:.85rem}
+  .hint{font-size:.75rem;color:#6b7a75;margin-top:.25rem}
+  button{background:var(--teal);color:#fff;border:0;border-radius:6px;padding:.65rem 1.4rem;
+         font:inherit;font-weight:600;cursor:pointer}
+  button:hover{background:var(--teal-soft)}
+  button.gold{background:var(--gold);color:var(--teal-deep)}
+  button.gold:hover{background:var(--gold-soft)}
+  button:disabled{opacity:.5;cursor:not-allowed}
+  .row{display:flex;gap:1rem;flex-wrap:wrap}
+  .row>div{flex:1 1 220px}
+  .hidden{display:none}
+  .error{color:var(--err);font-size:.85rem;margin-top:.5rem}
+  .demo-banner{background:var(--gold);color:var(--teal-deep);text-align:center;
+               font-size:.8rem;font-weight:600;padding:.35rem}
+  /* status feed */
+  #stagebar{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1rem}
+  .stage{font-size:.72rem;font-weight:600;padding:.25rem .6rem;border-radius:999px;
+         background:#ccd8e0;color:#5a707e}
+  .stage.active{background:var(--gold);color:var(--teal-deep)}
+  .stage.done{background:var(--teal);color:#fff}
+  #feed{background:var(--teal-deep);color:#cfe0ec;border-radius:8px;padding:.9rem 1rem;
+        font-family:Consolas,monospace;font-size:.78rem;line-height:1.55;max-height:300px;
+        overflow-y:auto;white-space:pre-wrap}
+  #feed .warn{color:#f0c05a}  /* semantic warning amber, not a brand color */
+  #feed .error{color:#ff9d8a}
+  #outputs a{display:block;margin:.45rem 0;color:var(--teal);font-weight:600}
+  .state-pill{font-size:.75rem;font-weight:700;padding:.2rem .6rem;border-radius:999px;color:#fff;margin-left:.5rem}
+  .state-running{background:var(--gold);color:var(--teal-deep)}
+  .state-done{background:var(--ok)} .state-error{background:var(--err)}
+  .state-needs-review{background:var(--warn)}
+</style>
+</head>
+<body>
+<div id="demoBanner" class="demo-banner hidden">DEMO MODE — no server connected; runs are simulated</div>
+<header>
+  <h1>Cincinnati AI Catalyst <span>· Video Pipeline</span></h1>
+  <p>Drop a meeting in, click RUN, collect the links.</p>
+</header>
+<main>
+
+  <!-- passcode gate -->
+  <div class="card" id="gateCard">
+    <h2>Passcode</h2>
+    <label for="passcode">Enter the shared passcode</label>
+    <input type="password" id="passcode" autocomplete="current-password">
+    <div class="error hidden" id="gateError">Wrong passcode — try again.</div>
+    <p style="margin-top:1rem"><button id="gateBtn">Enter</button></p>
+  </div>
+
+  <!-- upload form -->
+  <div class="card hidden" id="formCard">
+    <h2>New meeting</h2>
+    <div class="row">
+      <div>
+        <label for="title">Meeting title</label>
+        <input type="text" id="title" placeholder="e.g. CAIC Monthly Meetup">
+      </div>
+      <div>
+        <label for="date">Meeting date</label>
+        <input type="date" id="date">
+      </div>
+    </div>
+    <label for="video">Meeting video <span style="font-weight:400">(optional)</span></label>
+    <input type="file" id="video" accept="video/*">
+    <label for="transcriptFile">Transcript file <span style="font-weight:400">(optional)</span></label>
+    <input type="file" id="transcriptFile" accept=".txt,.vtt,.srt,.md">
+    <label for="transcriptText">…or paste the transcript</label>
+    <textarea id="transcriptText" placeholder="Paste transcript text here"></textarea>
+    <p class="hint">Provide a video, a transcript, or both. Video-only runs are transcribed automatically.</p>
+    <div class="error hidden" id="formError"></div>
+    <p style="margin-top:1rem"><button class="gold" id="runBtn">RUN</button></p>
+  </div>
+
+  <!-- status feed -->
+  <div class="card hidden" id="statusCard">
+    <h2>Run status</h2>
+    <p style="margin:.2rem 0 .9rem;font-size:.9rem"><strong id="jobTitle"></strong>
+      <span id="statePill" class="state-pill state-running">running</span></p>
+    <div id="stagebar"></div>
+    <div id="feed"></div>
+    <div id="review" class="hidden">
+      <h2 style="margin-top:1.2rem">Needs your review</h2>
+      <p class="hint">These concept matches were uncertain, so nothing was merged.
+      Resolve by editing <code>data/concepts.json</code> in the repo.</p>
+      <ul id="reviewList" style="font-size:.85rem"></ul>
+    </div>
+    <div id="outputs" class="hidden">
+      <h2 style="margin-top:1.2rem">Your links</h2>
+      <div id="outputLinks"></div>
+    </div>
+    <p style="margin-top:1rem"><button id="newRunBtn" class="hidden">Start another run</button></p>
+  </div>
+
+</main>
+<script>
+"use strict";
+// ---------------------------------------------------------------------------
+// DEMO MODE: opening this file directly (file://) or adding ?demo to the URL
+// runs a fully simulated pipeline so the UI can be reviewed with no server.
+// The deployed page uses the real API below — same file, unchanged.
+// ---------------------------------------------------------------------------
+const DEMO = location.protocol === "file:" || new URLSearchParams(location.search).has("demo");
+
+const STAGES = ["preflight","transcribe","analyze","concept-ledger","publish-site","video-assembly","youtube-kit"];
+const $ = id => document.getElementById(id);
+let passcode = sessionStorage.getItem("caic_pass") || "";
+let pollTimer = null;
+
+// ------------------------- API (real + demo) -------------------------------
+const realApi = {
+  async ping(p){ const r = await fetch(`/api/ping?passcode=${encodeURIComponent(p)}`); return r.ok; },
+  async run(formData){ const r = await fetch("/api/run",{method:"POST",body:formData});
+    if(!r.ok){ throw new Error((await r.json().catch(()=>({detail:r.statusText}))).detail); }
+    return (await r.json()).job_id; },
+  async status(id){ const r = await fetch(`/api/status/${id}?passcode=${encodeURIComponent(passcode)}`);
+    if(!r.ok) throw new Error("status fetch failed"); return r.json(); },
+};
+
+const demoApi = (() => {
+  let job = null, step = 0;
+  const script = [
+    ["preflight","Inputs: video=yes, transcript=no"],
+    ["transcribe","Extracting audio with ffmpeg…"],
+    ["transcribe","faster-whisper (GPU) — 42 min of audio transcribed"],
+    ["analyze","Generating summary, key points, chapters…"],
+    ["concept-ledger","3 concepts matched, 1 new, 1 uncertain (flagged for review)"],
+    ["publish-site","Summary page pushed — live on GitHub Pages"],
+    ["video-assembly","Rendering branded key-points slide"],
+    ["video-assembly","FFmpeg stitch: intro → slide → recording (stream-copy fast path)"],
+    ["youtube-kit","Packaging YouTube Kit (mp4 + title + description + chapters)"],
+  ];
+  return {
+    async ping(p){ return p.length > 0; },
+    async run(fd){
+      job = { id:"demo-job", title: fd.get("title") || "Demo Meeting", state:"running",
+              stage:"queued", events:[{t:Date.now()/1000,level:"info",msg:"Job created (demo)"}], outputs:{} };
+      step = 0; return job.id;
+    },
+    async status(){
+      if(step < script.length){
+        const [stage,msg] = script[step++];
+        if(job.stage !== stage){ job.stage = stage;
+          job.events.push({t:Date.now()/1000,level:"info",msg:`— ${stage} —`}); }
+        job.events.push({t:Date.now()/1000,level: msg.includes("uncertain")?"warn":"info", msg});
+      } else if(job.state === "running"){
+        job.state = "done"; job.stage = "finished";
+        job.events.push({t:Date.now()/1000,level:"info",msg:"Job finished"});
+        job.outputs = {"YouTube Kit (download)":"#demo",
+                       "Live summary page":"#demo",
+                       "Concept tracker":"#demo"};
+        job.review = [{candidate:"Community AI Lab", claimed_match:"AI Learning Hub",
+                       reason:"similar scope but possibly a distinct initiative"}];
+      }
+      return structuredClone(job);
+    },
+  };
+})();
+
+const api = DEMO ? demoApi : realApi;
+if(DEMO) $("demoBanner").classList.remove("hidden");
+
+// ------------------------- passcode gate -----------------------------------
+async function tryEnter(p){
+  if(await api.ping(p)){
+    passcode = p; sessionStorage.setItem("caic_pass", p);
+    $("gateCard").classList.add("hidden"); $("formCard").classList.remove("hidden");
+    return true;
+  }
+  return false;
+}
+$("gateBtn").onclick = async () => {
+  if(!await tryEnter($("passcode").value)) $("gateError").classList.remove("hidden");
+};
+$("passcode").addEventListener("keydown", e => { if(e.key==="Enter") $("gateBtn").click(); });
+
+// ------------------------- run ---------------------------------------------
+$("date").value = new Date().toISOString().slice(0,10);
+
+$("runBtn").onclick = async () => {
+  const err = $("formError"); err.classList.add("hidden");
+  const title = $("title").value.trim();
+  const hasVideo = $("video").files.length > 0;
+  const hasTranscript = $("transcriptFile").files.length > 0 || $("transcriptText").value.trim();
+  if(!title){ return showErr("Please enter a meeting title."); }
+  if(!hasVideo && !hasTranscript){ return showErr("Upload a video, a transcript, or both."); }
+
+  const fd = new FormData();
+  fd.append("passcode", passcode);
+  fd.append("title", title);
+  fd.append("date", $("date").value);
+  fd.append("transcript_text", $("transcriptText").value);
+  if(hasVideo) fd.append("video", $("video").files[0]);
+  if($("transcriptFile").files.length) fd.append("transcript_file", $("transcriptFile").files[0]);
+
+  $("runBtn").disabled = true; $("runBtn").textContent = "Uploading…";
+  try{
+    const jobId = await api.run(fd);
+    sessionStorage.setItem("caic_job", jobId);
+    showStatus(title); poll(jobId);
+  }catch(e){ showErr(e.message || "Upload failed"); }
+  finally{ $("runBtn").disabled = false; $("runBtn").textContent = "RUN"; }
+
+  function showErr(m){ err.textContent = m; err.classList.remove("hidden"); }
+};
+
+// ------------------------- status feed -------------------------------------
+function showStatus(title){
+  $("formCard").classList.add("hidden");
+  $("statusCard").classList.remove("hidden");
+  $("jobTitle").textContent = title;
+  $("stagebar").innerHTML = STAGES.map(s=>`<span class="stage" data-s="${s}">${s}</span>`).join("");
+  $("feed").innerHTML = ""; $("outputs").classList.add("hidden");
+  $("newRunBtn").classList.add("hidden");
+}
+
+function poll(jobId){
+  clearInterval(pollTimer);
+  pollTimer = setInterval(async () => {
+    let job; try{ job = await api.status(jobId); }catch{ return; }
+    render(job);
+    if(["done","error","needs-review"].includes(job.state)){
+      clearInterval(pollTimer); sessionStorage.removeItem("caic_job");
+      $("newRunBtn").classList.remove("hidden");
+    }
+  }, DEMO ? 900 : 2000);
+}
+
+function render(job){
+  const pill = $("statePill");
+  pill.textContent = job.state;
+  pill.className = `state-pill state-${job.state}`;
+  const idx = STAGES.indexOf(job.stage);
+  document.querySelectorAll(".stage").forEach(el => {
+    const i = STAGES.indexOf(el.dataset.s);
+    el.className = "stage" + (i < idx || job.state==="done" ? " done" : i===idx ? " active" : "");
+  });
+  $("feed").innerHTML = job.events.map(e => {
+    const ts = new Date(e.t*1000).toLocaleTimeString();
+    return `<div class="${e.level}">[${ts}] ${escapeHtml(e.msg)}</div>`;
+  }).join("");
+  $("feed").scrollTop = $("feed").scrollHeight;
+  const review = job.review || [];
+  if(review.length){
+    $("review").classList.remove("hidden");
+    $("reviewList").innerHTML = review.map(r =>
+      `<li><strong>${escapeHtml(r.candidate)}</strong>` +
+      (r.claimed_match ? ` ↔ ${escapeHtml(r.claimed_match)}` : "") +
+      ` — ${escapeHtml(r.reason || "")}</li>`).join("");
+  }
+  const names = Object.keys(job.outputs || {});
+  if(names.length){
+    $("outputs").classList.remove("hidden");
+    $("outputLinks").innerHTML = names.map(n =>
+      `<a href="${job.outputs[n]}" target="_blank" rel="noopener">→ ${escapeHtml(n)}</a>`).join("");
+  }
+}
+
+function escapeHtml(s){ const d=document.createElement("div"); d.textContent=s; return d.innerHTML; }
+
+$("newRunBtn").onclick = () => {
+  $("statusCard").classList.add("hidden");
+  $("formCard").classList.remove("hidden");
+  $("video").value = ""; $("transcriptFile").value = ""; $("transcriptText").value = "";
+};
+
+// ------------------------- resume on reload --------------------------------
+(async () => {
+  if(passcode && await api.ping(passcode).catch(()=>false)){
+    $("gateCard").classList.add("hidden"); $("formCard").classList.remove("hidden");
+    const jobId = sessionStorage.getItem("caic_job");
+    if(jobId && !DEMO){
+      try{ const job = await api.status(jobId); showStatus(job.title); render(job);
+           if(job.state==="running"||job.state==="queued") poll(jobId);
+           else $("newRunBtn").classList.remove("hidden");
+      }catch{ sessionStorage.removeItem("caic_job"); }
+    }
+  }
+})();
+</script>
+</body>
+</html>
