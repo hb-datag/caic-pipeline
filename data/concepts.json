@@ -1,4 +1,49 @@
 {
   "schema_version": 1,
-  "concepts": []
+  "concepts": [
+    {
+      "name": "AI Learning Hub Pilot",
+      "aliases": [],
+      "initiated": {
+        "date": "2026-08-24",
+        "meeting": "2026-08-24-pipeline-test-run"
+      },
+      "mentions": [
+        {
+          "date": "2026-08-24",
+          "meeting": "2026-08-24-pipeline-test-run",
+          "snippet": "I drafted the curriculum outline: three tracks, one for total beginners, one for small business owners, one for nonprofits.",
+          "depth": "discussed"
+        }
+      ],
+      "status": "proposed",
+      "last_updated": "2026-08-24"
+    },
+    {
+      "name": "Neighborhood AI Clinics",
+      "aliases": [],
+      "initiated": {
+        "date": "2026-08-24",
+        "meeting": "2026-08-24-pipeline-test-run"
+      },
+      "mentions": [
+        {
+          "date": "2026-08-24",
+          "meeting": "2026-08-24-pipeline-test-run",
+          "snippet": "Think of it like a repair cafe but for AI questions. People bring their laptop or their phone, and a volunteer sits with them.",
+          "depth": "discussed"
+        }
+      ],
+      "status": "proposed",
+      "last_updated": "2026-08-24"
+    }
+  ],
+  "meetings": [
+    {
+      "date": "2026-08-24",
+      "title": "Pipeline Test Run",
+      "slug": "2026-08-24-pipeline-test-run",
+      "summary_short": "The CAIC working session focused on two primary initiatives: the AI Learning Hub and the proposed Neighborhood AI Clinics. Maria presented a curriculum outline for the Learning Hub featuring three distinct tracks tailore"
+    }
+  ]
 }

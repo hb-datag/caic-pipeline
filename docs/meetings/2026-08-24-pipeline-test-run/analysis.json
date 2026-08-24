@@ -1,0 +1,44 @@
+{
+  "summary": "The CAIC working session focused on two primary initiatives: the AI Learning Hub and the proposed Neighborhood AI Clinics. Maria presented a curriculum outline for the Learning Hub featuring three distinct tracks tailored to beginners, small business owners, and nonprofits. The group agreed to pilot the beginner track at the downtown library in October, with Janet from the main branch confirming venue availability provided CAIC supplies the materials.\n\nDevon introduced the Neighborhood AI Clinics concept as a drop-in, one-on-one troubleshooting service, contrasting it with the structured classroom format of the Learning Hub. To avoid conflating the two programs prematurely, the team decided to keep them separate for now and tasked Devon with drafting a one-pager for review at the next meeting. The session concluded with a brief update on the organization's newsletter, which achieved a record thirty-eight percent open rate.",
+  "key_points": [
+    {
+      "text": "The AI Learning Hub curriculum will feature three tracks: beginners, small business owners, and nonprofits.",
+      "timestamp": null
+    },
+    {
+      "text": "The beginner track will be piloted at the downtown library in October with venue support from librarian Janet.",
+      "timestamp": null
+    },
+    {
+      "text": "Neighborhood AI Clinics are proposed as a drop-in, one-on-one troubleshooting service distinct from structured classes.",
+      "timestamp": null
+    },
+    {
+      "text": "The team agreed to keep the Learning Hub and Clinics initiatives separate until further review.",
+      "timestamp": null
+    },
+    {
+      "text": "The recent newsletter achieved a thirty-eight percent open rate, marking the best performance so far.",
+      "timestamp": null
+    }
+  ],
+  "chapters": [],
+  "decisions": [
+    "Pilot the AI Learning Hub beginner track at the downtown library in October.",
+    "Keep the Neighborhood AI Clinics concept separate from the Learning Hub and review a one-pager next meeting before deciding on its standalone status."
+  ],
+  "action_items": [
+    {
+      "text": "Own and finalize the AI Learning Hub curriculum outline.",
+      "owner": "Maria"
+    },
+    {
+      "text": "Handle printed materials for the October library pilot.",
+      "owner": "Haidar"
+    },
+    {
+      "text": "Write a one-pager outlining the Neighborhood AI Clinics concept for the next meeting.",
+      "owner": "Devon"
+    }
+  ]
+}

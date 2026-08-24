@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Concept Tracker · Cincinnati AI Catalyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="../">Cincinnati AI <strong>Catalyst</strong></a>
+    <nav>
+      <a href="../">Meetings</a>
+      <a href="../concepts/">Concept Tracker</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>Concept Tracker</h1>
+<p class="lede">Every concept CAIC is developing, tracked across meetings.
+Click a column to sort, a row for the full timeline.</p>
+
+<div class="tablewrap">
+<table id="ct">
+  <thead><tr>
+    <th data-k="name">Concept</th>
+    <th data-k="status">Status</th>
+    <th data-k="first">First seen</th>
+    <th data-k="last">Last mention</th>
+    <th data-k="n" class="num">Meetings</th>
+  </tr></thead>
+  <tbody>
+  
+    <tr data-href="ai-learning-hub-pilot/"
+        data-name="ai learning hub pilot" data-status="proposed"
+        data-first="2026-08-24" data-last="2026-08-24" data-n="1">
+      <td><a href="ai-learning-hub-pilot/">AI Learning Hub Pilot</a></td>
+      <td><span class="pill s-proposed">proposed</span></td>
+      <td>2026-08-24</td>
+      <td>2026-08-24</td>
+      <td class="num">1</td>
+    </tr>
+  
+    <tr data-href="neighborhood-ai-clinics/"
+        data-name="neighborhood ai clinics" data-status="proposed"
+        data-first="2026-08-24" data-last="2026-08-24" data-n="1">
+      <td><a href="neighborhood-ai-clinics/">Neighborhood AI Clinics</a></td>
+      <td><span class="pill s-proposed">proposed</span></td>
+      <td>2026-08-24</td>
+      <td>2026-08-24</td>
+      <td class="num">1</td>
+    </tr>
+  
+  </tbody>
+</table>
+</div>
+<script>
+(function(){
+  var tb=document.querySelector('#ct tbody'), dir={};
+  document.querySelectorAll('#ct th').forEach(function(th){
+    th.onclick=function(){
+      var k=th.dataset.k; dir[k]=!dir[k];
+      Array.prototype.slice.call(tb.rows).sort(function(a,b){
+        var x=a.dataset[k]||'', y=b.dataset[k]||'';
+        if(k==='n'){x=+x;y=+y;}
+        return (x<y?-1:x>y?1:0)*(dir[k]?1:-1);
+      }).forEach(function(r){tb.appendChild(r);});
+    };
+  });
+})();
+</script>
+
+</main>
+<footer><div class="wrap">Cincinnati AI Catalyst · generated automatically by the CAIC pipeline</div></footer>
+</body>
+</html>
