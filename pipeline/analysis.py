@@ -44,7 +44,7 @@ Be faithful to the transcript — do not invent facts, names, or timestamps.
 
 TRANSCRIPT:
 {_clip(transcript)}"""
-    return llm.generate(prompt, schemas.ANALYSIS_SCHEMA, max_tokens=4096)
+    return llm.generate(prompt, schemas.ANALYSIS_SCHEMA)
 
 
 def extract_candidates(transcript: str, title: str, date: str) -> list:
@@ -65,8 +65,7 @@ Typically 3-8 candidates. Fewer is fine.
 
 TRANSCRIPT:
 {_clip(transcript)}"""
-    return llm.generate(prompt, schemas.CONCEPT_CANDIDATES_SCHEMA,
-                        max_tokens=2048)["candidates"]
+    return llm.generate(prompt, schemas.CONCEPT_CANDIDATES_SCHEMA)["candidates"]
 
 
 def reconcile(candidates: list, ledger: dict) -> list:
@@ -94,5 +93,4 @@ Return JSON: {{"matches": [{{"candidate", "verdict", "existing_name", "reason"}}
 CRITICAL RULE: only answer "existing" when you are CONFIDENT it is the same
 concept. If in doubt, answer "uncertain" — a wrong merge corrupts the ledger,
 while "uncertain" just asks a human. Include every candidate exactly once."""
-    return llm.generate(prompt, schemas.RECONCILE_SCHEMA,
-                        max_tokens=2048)["matches"]
+    return llm.generate(prompt, schemas.RECONCILE_SCHEMA)["matches"]

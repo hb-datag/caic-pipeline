@@ -96,6 +96,10 @@ VLLM_PORT = 8000
 )
 def process_job(job_id: str) -> None:
     """Background job runner. Spawned (fire-and-forget) by the RUN endpoint."""
+    # A reused (warm) container sees a stale volume snapshot — refresh it so
+    # the files the web endpoint just committed are visible.
+    data_vol.reload()
+
     from pipeline.runner import run_job
 
     run_job(job_id)

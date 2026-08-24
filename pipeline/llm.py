@@ -31,7 +31,9 @@ DEFAULT_SYSTEM = (
 
 
 def generate(prompt: str, schema: dict, *, system: str = DEFAULT_SYSTEM,
-             max_tokens: int = 4096) -> dict:
+             max_tokens: int = 10240) -> dict:
+    # Note: Qwen3.6 reasons before answering, and reasoning tokens count
+    # against max_tokens — keep the budget generous or the JSON never arrives.
     """Run one LLM call and return schema-valid JSON (retrying once)."""
     attempt_prompt = prompt
     last_err = None
@@ -65,12 +67,13 @@ def _call_backend(prompt: str, system: str, max_tokens: int) -> str:
     raise LLMError(f"Unknown LLM_BACKEND: {backend!r}")
 
 
-def ensure_ready(log=print, timeout_s: int = 120) -> None:
+def ensure_ready(log=print, timeout_s: int = 600) -> None:
     """Verify the model server is reachable (no-op for API backends).
 
     Polls the OpenAI-standard /v1/models endpoint (served by Ollama, vLLM,
-    and LM Studio alike). The CAIC server is an always-on workstation, so a
-    couple of minutes of retries covers a reboot; past that we surface the
+    and LM Studio alike). The retry window is generous (10 min) because it
+    also has to ride out transient DNS flakiness for the ts.net funnel
+    hostname inside fresh cloud containers; past that we surface the
     operator contact message from config.OFFLINE_MESSAGE."""
     if config.LLM_BACKEND != "vllm":
         return
@@ -79,13 +82,16 @@ def ensure_ready(log=print, timeout_s: int = 120) -> None:
     import time
     start = time.time()
     while time.time() - start < timeout_s:
+        detail = ""
         try:
-            if requests.get(f"{config.VLLM_BASE_URL}/v1/models",
-                            headers=_vllm_headers(), timeout=15).status_code == 200:
+            r = requests.get(f"{config.VLLM_BASE_URL}/v1/models",
+                             headers=_vllm_headers(), timeout=15)
+            if r.status_code == 200:
                 return
-        except requests.RequestException:
-            pass
-        log("model server not answering yet — retrying…")
+            detail = f"HTTP {r.status_code}: {r.text[:120]}"
+        except requests.RequestException as exc:
+            detail = f"{exc.__class__.__name__}: {str(exc)[:160]}"
+        log(f"model server not ready ({detail}) — retrying…")
         time.sleep(15)
     raise LLMError("The AI model server is not reachable. " + config.OFFLINE_MESSAGE)
 
