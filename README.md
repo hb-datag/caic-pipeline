@@ -16,15 +16,15 @@ Modal's included monthly credit.
 
 | Component | What it does |
 |---|---|
-| **Upload page** (`web/`) | A single passcode-protected page hosted on Modal. Operator drops in a video, a transcript, or both, plus title and date, and clicks RUN. |
+| **Upload page** (`web/`) | A single passcode-protected page hosted on Modal. Operator drops in a video, a transcript, or both, plus title and date, and clicks RUN. Recent runs are listed so links can be retrieved anytime. |
 | **RUN endpoint + status feed** (`modal_app.py`) | Receives the upload, stores it, kicks off a background job, and answers the page's polling requests so the operator sees live progress. |
 | **Job runner** (`pipeline/runner.py`) | The conductor. Looks at what was uploaded and decides which stages run (see Input logic below). |
-| **Transcription** *(Phase 3)* | If no transcript was provided, faster-whisper runs on a Modal GPU container (spun up per job, torn down after) with word-level timestamps. |
+| **Transcription** (`whisper_service/`, `pipeline/transcribe.py`) | If no transcript was provided: ffmpeg extracts the audio on Modal, sends it to a small faster-whisper service (large-v3-turbo) on the CAIC 5090 workstation, and gets back word-level timestamps. Timestamped transcripts feed real times into key points and chapters. |
 | **Intelligence** (`pipeline/llm.py`) | Key points, chapters, summaries, and concept extraction from Qwen3.6-27B (open weights) served by Ollama on CAIC's always-on RTX 5090 workstation, reached via a Tailscale Funnel URL. **Every** LLM call goes through one function, `generate(prompt, schema)`, so the backend can be swapped (any OpenAI-compatible server ↔ Gemini free tier ↔ Claude API) by changing one config value — a Modal-GPU vLLM variant sits commented-out in `modal_app.py` for successors without a GPU box. All outputs are schema-validated and retried once. If the workstation is offline, the run status shows a contact message instead of failing cryptically. |
 | **Concept ledger** (`data/concepts.json`) | The novel piece: a single JSON file tracking every concept CAIC discusses across meetings — when it started, every mention, and a status (proposed → active → growing → dormant → completed). Every change is a git commit, so history is the audit trail. Uncertain matches are surfaced for human confirmation, never silently merged. |
 | **Public site** (`docs/`) | Static HTML generated with Jinja2 (`site_templates/`) and pushed to this repo; GitHub Pages serves it from `/docs`. Index of meetings, per-meeting summary pages, and the concept tracker. Summary pages go live as soon as analysis finishes — before any video is public. |
-| **Video assembly** *(Phase 4)* | FFmpeg stitches: CAIC intro → branded key-points slide (CAIC blue palette, rendered in Python) → meeting recording. Stream-copy fast path when the input is already 1080p/30fps/H.264/AAC. |
-| **YouTube Kit** *(Phase 4)* | The final mp4 plus paste-ready title, description, and chapter list. The operator uploads via YouTube Studio (~2 min). Auto-upload is deliberately not built yet: unverified YouTube API projects lock uploads private. The code is structured so a `videos.insert` step can be slotted in after CAIC passes YouTube's API audit. |
+| **Video assembly** (`pipeline/video.py`, `pipeline/slide.py`) | FFmpeg stitches: CAIC intro (placeholder title card until `assets/caic_intro.mp4` exists) → branded key-points slide (Pillow, CAIC blue palette, timestamps) → meeting recording. Stream-copy fast path whenever the input is H.264/AAC (incl. 1080p/30); full re-encode fallback otherwise. |
+| **YouTube Kit** (`pipeline/video.py`, `pipeline/youtube_upload.py`) | The final mp4 plus paste-ready title, description, and offset-corrected chapter list, downloadable from the run page. The operator uploads via YouTube Studio (~2 min). A `videos.insert` auto-uploader (upload-as-private) is built but DORMANT behind `CAIC_YOUTUBE_UPLOAD` until CAIC passes YouTube's API audit — unverified API projects lock uploads private permanently. |
 
 ## Input logic
 
@@ -51,11 +51,14 @@ guides/            Human documentation: setup, runbook, redeploy guide
 
 | Phase | Scope | Status |
 |---|---|---|
-| 1 | Repo scaffold, Modal app skeleton, upload page + RUN + live status feed | **built — needs deploy test** |
-| 2 | Transcript path end-to-end: LLM analysis → summary page → concept ledger → Pages push. Quality checkpoint on 2–3 real transcripts. | **built — needs deploy test + quality checkpoint** |
-| 3 | faster-whisper transcription for video uploads | not started |
-| 4 | Branded slide + FFmpeg stitch + YouTube Kit | not started |
-| 5 | Operator runbook + successor redeploy guide | not started |
+| 1 | Repo scaffold, Modal app skeleton, upload page + RUN + live status feed | **live** |
+| 2 | Transcript path end-to-end: LLM analysis → summary page → concept ledger → Pages push (quality checkpoint passed on real transcripts) | **live** |
+| 3 | faster-whisper transcription for video uploads (5090 via funnel) | **live** |
+| 4 | Branded slide + FFmpeg stitch + YouTube Kit + downloads | **live** |
+| 5 | Operator runbook (`guides/RUNBOOK.md`) + successor guide (`guides/REDEPLOY.md`) | **done** |
+
+Public site: **https://caic.datag.co** (also at hb-datag.github.io/caic-pipeline).
+Operator page: https://hb-datag--caic-pipeline-web.modal.run
 
 ## Quickstart
 
@@ -74,4 +77,4 @@ modal serve modal_app.py       # dev mode with live reload
 | `caic-app` | `CAIC_PASSCODE` | Phase 1 |
 | `caic-github` | `GITHUB_TOKEN`, `GITHUB_REPO` | Phase 2 |
 | `caic-llm` | `CAIC_VLLM_BASE_URL`, `CAIC_VLLM_MODEL` | Phase 2 |
-| `caic-youtube` | (future) | Phase 4+ |
+| `caic-youtube` | `YT_CLIENT_ID`, `YT_CLIENT_SECRET`, `YT_REFRESH_TOKEN`, `CAIC_YOUTUBE_UPLOAD` | after YouTube API audit |

@@ -68,5 +68,8 @@ class GitHubRepo:
 
     @property
     def pages_base_url(self) -> str:
+        from . import config
+        if config.PAGES_URL:
+            return config.PAGES_URL.rstrip("/")
         owner, name = self.repo.split("/", 1)
         return f"https://{owner}.github.io/{name}"

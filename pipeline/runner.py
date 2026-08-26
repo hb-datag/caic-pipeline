@@ -65,11 +65,22 @@ def run_job(job_id: str) -> None:
                           f"{base}/final.mp4")
             st.add_output(job_id, "YouTube Kit — title, description, chapters",
                           f"{base}/youtube.txt")
-            st.log(job_id, "YouTube Kit ready — download, then upload via "
-                           "YouTube Studio (~2 min). Auto-upload comes after "
-                           "the YouTube API audit.")
-            # TODO(later): optional videos.insert upload-as-private step, once
-            # the CAIC project passes YouTube's API audit.
+            from . import youtube_upload as yt
+            if yt.enabled():
+                try:
+                    url = yt.upload_private(
+                        final, f"{job['title']} | Cincinnati AI Catalyst — "
+                               f"{job['date']}", text,
+                        log=lambda m: st.log(job_id, m))
+                    st.add_output(job_id, "YouTube (uploaded private — "
+                                          "click Publish in Studio)", url)
+                except Exception as exc:  # noqa: BLE001 — kit still works
+                    st.log(job_id, f"YouTube auto-upload failed ({exc}); "
+                                   "use the kit manually.", "warn")
+            else:
+                st.log(job_id, "YouTube Kit ready — download, then upload via "
+                               "YouTube Studio (~2 min). Auto-upload activates "
+                               "after the YouTube API audit (see REDEPLOY.md).")
 
         st.finish(job_id)
 

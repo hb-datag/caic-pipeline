@@ -94,6 +94,8 @@ VLLM_PORT = 8000
         modal.Secret.from_name("caic-app"),
         modal.Secret.from_name("caic-github"),  # GITHUB_TOKEN + GITHUB_REPO
         modal.Secret.from_name("caic-llm"),     # CAIC_VLLM_BASE_URL + CAIC_VLLM_MODEL
+        # Uncomment after the YouTube API audit passes (see guides/REDEPLOY.md):
+        # modal.Secret.from_name("caic-youtube"),
     ],
     timeout=2 * 60 * 60,  # re-encode fallback on a long meeting needs headroom
 )
