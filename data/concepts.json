@@ -11,7 +11,7 @@
       "date": "2026-08-26",
       "title": "Test-2",
       "slug": "2026-08-26-test-2",
-      "summary_short": "The meeting begins with a proposal to restructure the engineering key review into four department-specific sessions on a two-month rotation. This change aims to increase visibility, allow deeper dives into specific areas"
+      "summary_short": "The meeting began with a proposal to restructure the engineering key review into four department-specific sessions operating on a two-month rotation to improve visibility and reduce calendar fatigue. The team agreed to t"
     }
   ],
   "concepts": [
@@ -190,6 +190,42 @@
           "meeting": "2026-08-26-test-2",
           "snippet": "We have had a much keener focus on SUS over the past several quarters.",
           "depth": "discussed"
+        }
+      ],
+      "status": "proposed",
+      "last_updated": "2026-08-26"
+    },
+    {
+      "name": "Dedicated Data Host Initiative",
+      "aliases": [],
+      "initiated": {
+        "date": "2026-08-26",
+        "meeting": "2026-08-26-test-2"
+      },
+      "mentions": [
+        {
+          "date": "2026-08-26",
+          "meeting": "2026-08-26-test-2",
+          "snippet": "one of the most specific actions we're going to take, though, is separating out and having a dedicated host",
+          "depth": "discussed"
+        }
+      ],
+      "status": "proposed",
+      "last_updated": "2026-08-26"
+    },
+    {
+      "name": "Security Prioritization Metrics",
+      "aliases": [],
+      "initiated": {
+        "date": "2026-08-26",
+        "meeting": "2026-08-26-test-2"
+      },
+      "mentions": [
+        {
+          "date": "2026-08-26",
+          "meeting": "2026-08-26-test-2",
+          "snippet": "We need to get more security work prioritized... neither that problem nor that activity is sort of currently reflected in our security metrics.",
+          "depth": "passing"
         }
       ],
       "status": "proposed",

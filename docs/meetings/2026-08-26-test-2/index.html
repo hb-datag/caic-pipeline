@@ -30,22 +30,22 @@
 
 <section>
   <h2>Recap</h2>
-  <p>The meeting begins with a proposal to restructure the engineering key review into four department-specific sessions on a two-month rotation. This change aims to increase visibility, allow deeper dives into specific areas, and reduce calendar fatigue for stakeholders without adding net new meetings. The team agrees to trial this approach while remaining flexible to adjust frequency based on department size and needs.</p><p>A significant portion of the discussion focuses on refining engineering KPIs, particularly around Merge Request (MR) rates. After clarifying the definitions of narrow versus wider MR rates, the group decides to simplify the metric by tracking the percentage of total MRs originating from the community over time. This shift aims to prevent gaming the system and better reflect community health relative to company growth. The team also addresses data lag issues affecting current metrics, assigning infrastructure as the primary owner for resolving Postgres replication constraints through a dedicated host.</p><p>Finally, the review covers defect tracking against Service Level Objectives (SLOs) and user satisfaction scores. Feedback is given to pivot defect metrics from measuring closed bugs to tracking open bugs that exceed SLO timelines, ensuring a more accurate view of backlog health. The meeting concludes with an analysis of SUS trends and MR rate targets, agreeing to hold the productivity target steady at 10 while shifting strategic focus toward improving quality, security, and availability indicators.</p>
+  <p>The meeting began with a proposal to restructure the engineering key review into four department-specific sessions operating on a two-month rotation to improve visibility and reduce calendar fatigue. The team agreed to trial this approach while remaining flexible to adjust frequency based on department size and needs. Following this, the discussion shifted to refining engineering KPIs, specifically addressing the complexity of tracking community contributions versus internal merge requests.</p><p>A significant portion of the review focused on data infrastructure and defect tracking metrics. The team addressed a Postgres replication lag issue, agreeing that Infrastructure should lead on provisioning a dedicated host for data engineering workloads while exploring database tuning options. Additionally, feedback was provided to overhaul how defect SLOs are measured, moving away from tracking closed bugs toward monitoring the percentage of open bugs that remain within or exceed SLO timeframes to prevent metric gaming.</p><p>The session concluded with updates on System Usability Scale (SUS) scores, which showed a stabilizing trend despite recent declines, and a review of the narrow MR rate. Context was provided regarding seasonal dips and vacation days, leading to a strategic decision to cap the MR rate target at 10. Going forward, the engineering team will maintain this productivity baseline while shifting focus toward improving quality, security, and availability metrics.</p>
 </section>
 
 <section>
   <h2>Key points</h2>
   <ul class="keypoints">
   
-    <li><span class="ts">00:00:10</span> Proposal to split the engineering key review into four department-specific meetings on a two-month rotation to improve depth and reduce calendar load.</li>
+    <li><span class="ts">00:00:56</span> Proposal to split the engineering key review into a two-month rotating schedule for Development/Quality and Security/UX departments.</li>
   
-    <li><span class="ts">00:07:02</span> Decision to simplify R&amp;D MR rate KPIs by tracking the percentage of total MRs from the community instead of using complex narrow/wider rate definitions.</li>
+    <li><span class="ts">00:07:02</span> Decision to simplify community contribution tracking by measuring the percentage of total MRs from the community instead of complex wider/narrow rates.</li>
   
-    <li><span class="ts">00:10:38</span> Identification of infrastructure as the DRI for Postgres replication lag, with plans to deploy a dedicated host for data engineering traffic.</li>
+    <li><span class="ts">00:10:38</span> Identification of Postgres replication lag requiring a dedicated host for data engineering and potential database tuning.</li>
   
-    <li><span class="ts">00:16:44</span> Feedback to adjust defect tracking metrics from measuring closed bugs meeting SLOs to measuring open bugs exceeding SLO timelines.</li>
+    <li><span class="ts">00:16:47</span> Shift in defect tracking methodology to measure the percentage of open bugs within SLO timeframes rather than focusing on closed bugs.</li>
   
-    <li><span class="ts">00:23:18</span> Agreement to hold the narrow MR rate target at 10 and shift strategic focus toward quality, security, and availability improvements.</li>
+    <li><span class="ts">00:23:18</span> Narrow MR rate target will be held at 10, with strategic focus shifting to quality, security, and availability improvements.</li>
   
   </ul>
 </section>
@@ -53,7 +53,7 @@
 
 <section>
   <h2>Decisions</h2>
-  <ul><li>Implement a two-month rotation for department-specific key reviews instead of adding three new permanent meetings.</li><li>Replace the complex R&amp;D wider/narrow MR rate KPIs with a single metric tracking the percentage of total MRs from the community.</li><li>Hold the narrow MR rate productivity target at 10 and prioritize improvements in quality, security, and availability.</li><li>Adjust defect tracking metrics to focus on the percentage of open bugs exceeding SLOs rather than just closed bugs meeting them.</li></ul>
+  <ul><li>Adopt a two-month rotating schedule for department key reviews (Development/Quality in month one, Security/UX in month two).</li><li>Replace the R&amp;D wider MR rate KPI with a simpler metric tracking the percentage of total MRs originating from the community.</li><li>Shift defect SLO measurement from closed bugs to the percentage of open bugs remaining within or exceeding SLO timeframes.</li><li>Cap the narrow MR rate target at 10 and redirect engineering focus toward quality, security, and availability metrics.</li></ul>
 </section>
 
 
@@ -62,11 +62,13 @@
   <h2>Action items</h2>
   <ul class="actions">
   
-    <li>Work with Mac to transition the MR rate KPI to the new community percentage metric. <span class="owner">— Lily</span></li>
+    <li>Work with Mac to transition the KPI dashboard to track the percentage of total MRs from the community. <span class="owner">— Lily</span></li>
   
-    <li>Add an update on the Postgres replication issue to next week&#39;s InfraKey review. <span class="owner">— Steve</span></li>
+    <li>Add an update on the Postgres replication lag issue and dedicated host plan to next week&#39;s InfraKey review. <span class="owner">— Steve</span></li>
   
-    <li>Conduct a deeper analysis of the S2 mean time to close spike and provide an update at the next meeting.</li>
+    <li>Investigate the S2 mean time to close spike and provide a deeper analysis at the next meeting. <span class="owner">— Christy</span></li>
+  
+    <li>Develop and deliver the new chart measuring the percentage of open bugs within/outside SLO in the data metrics work stream. <span class="owner">— Mac</span></li>
   
   </ul>
 </section>
@@ -76,7 +78,7 @@
 <section>
   <h2>Chapters</h2>
   <ul class="chapters">
-  <li><span class="ts">00:00:10</span> Meeting Restructuring Proposal</li><li><span class="ts">00:01:41</span> R&amp;D MR Rate KPI Discussion</li><li><span class="ts">00:09:40</span> Postgres Replication &amp; Data Lag</li><li><span class="ts">00:13:26</span> Defect Tracking &amp; SLO Metrics</li><li><span class="ts">00:18:48</span> SUS Scores &amp; MR Rate Targets</li>
+  <li><span class="ts">00:00:00</span> Meeting Intro &amp; Department Review Rotation</li><li><span class="ts">00:01:41</span> R&amp;D MR Rate KPI Simplification</li><li><span class="ts">00:09:37</span> Postgres Replication &amp; Infrastructure Updates</li><li><span class="ts">00:13:06</span> Defect Tracking &amp; SLO Metric Adjustments</li><li><span class="ts">00:18:33</span> SUS Metrics &amp; Security Prioritization</li><li><span class="ts">00:20:45</span> Narrow MR Rate Context &amp; Target Review</li>
   </ul>
 </section>
 
