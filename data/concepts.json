@@ -12,6 +12,12 @@
       "title": "Test-2",
       "slug": "2026-08-26-test-2",
       "summary_short": "The meeting began with a proposal to restructure the engineering key review into four department-specific sessions operating on a two-month rotation to improve visibility and reduce calendar fatigue. The team agreed to t"
+    },
+    {
+      "date": "2026-08-26",
+      "title": "Test-3",
+      "slug": "2026-08-26-test-3",
+      "summary_short": "The meeting focused on restructuring the engineering key review process and refining several core performance metrics. Eric Johnson proposed splitting the current combined review into four department-specific sessions (D"
     }
   ],
   "concepts": [
@@ -118,9 +124,15 @@
           "meeting": "2026-08-26-test-2",
           "snippet": "what if we just tracked as a KPI the percentage of total MRs that come from the community over time?",
           "depth": "deep-dive"
+        },
+        {
+          "date": "2026-08-26",
+          "meeting": "2026-08-26-test-3",
+          "snippet": "what if we just tracked as a KPI the percentage of total MRs that come from the community over time?",
+          "depth": "deep-dive"
         }
       ],
-      "status": "proposed",
+      "status": "active",
       "last_updated": "2026-08-26"
     },
     {
@@ -154,9 +166,15 @@
           "meeting": "2026-08-26-test-2",
           "snippet": "What I'm proposing is, of the open bugs, what percentage is outside of SLO.",
           "depth": "deep-dive"
+        },
+        {
+          "date": "2026-08-26",
+          "meeting": "2026-08-26-test-3",
+          "snippet": "I think we should be looking at open bugs. The entire population or percentage of those is within the SLO time.",
+          "depth": "deep-dive"
         }
       ],
-      "status": "proposed",
+      "status": "active",
       "last_updated": "2026-08-26"
     },
     {
@@ -208,9 +226,15 @@
           "meeting": "2026-08-26-test-2",
           "snippet": "one of the most specific actions we're going to take, though, is separating out and having a dedicated host",
           "depth": "discussed"
+        },
+        {
+          "date": "2026-08-26",
+          "meeting": "2026-08-26-test-3",
+          "snippet": "creating another dedicated host just for the data team to pull from",
+          "depth": "discussed"
         }
       ],
-      "status": "proposed",
+      "status": "active",
       "last_updated": "2026-08-26"
     },
     {
@@ -226,6 +250,42 @@
           "meeting": "2026-08-26-test-2",
           "snippet": "We need to get more security work prioritized... neither that problem nor that activity is sort of currently reflected in our security metrics.",
           "depth": "passing"
+        }
+      ],
+      "status": "proposed",
+      "last_updated": "2026-08-26"
+    },
+    {
+      "name": "Department Key Review Restructuring",
+      "aliases": [],
+      "initiated": {
+        "date": "2026-08-26",
+        "meeting": "2026-08-26-test-3"
+      },
+      "mentions": [
+        {
+          "date": "2026-08-26",
+          "meeting": "2026-08-26-test-3",
+          "snippet": "proposal to break up this meeting into four department key reviews",
+          "depth": "discussed"
+        }
+      ],
+      "status": "proposed",
+      "last_updated": "2026-08-26"
+    },
+    {
+      "name": "MR Rate Target Stabilization",
+      "aliases": [],
+      "initiated": {
+        "date": "2026-08-26",
+        "meeting": "2026-08-26-test-3"
+      },
+      "mentions": [
+        {
+          "date": "2026-08-26",
+          "meeting": "2026-08-26-test-3",
+          "snippet": "hold the line at productivity, but start to raise other things related to quality, security, availability",
+          "depth": "discussed"
         }
       ],
       "status": "proposed",

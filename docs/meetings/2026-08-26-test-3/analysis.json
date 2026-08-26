@@ -1,0 +1,75 @@
+{
+  "summary": "The meeting focused on restructuring the engineering key review process and refining several core performance metrics. Eric Johnson proposed splitting the current combined review into four department-specific sessions (Development, Quality, Security, and UX) run on a two-month rotation to prevent calendar overload while allowing deeper dives into each area. The team agreed to trial this approach with flexibility for adjustments based on department size and needs.\n\nA significant portion of the discussion centered on simplifying and improving engineering KPIs, particularly around merge request (MR) rates and defect tracking. The group decided to replace complex internal/external MR rate splits with a straightforward metric tracking the percentage of total MRs originating from the community. They also addressed data lag issues affecting February reports and Postgres replication constraints, assigning infrastructure ownership for dedicated hosting solutions. Finally, the team reviewed defect SLO tracking, agreeing to shift focus from closed bugs to open bugs exceeding SLOs to prevent metric gaming, and stabilized the narrow MR rate target at 10 while pivoting strategic focus toward quality, security, and system availability.",
+  "key_points": [
+    {
+      "text": "Proposal to rotate department key reviews bi-monthly to avoid adding net new meetings to stakeholder calendars.",
+      "timestamp": "00:00:51"
+    },
+    {
+      "text": "Decision to simplify R&D MR rate metrics by tracking the percentage of total community contributions instead of complex internal/external splits.",
+      "timestamp": "00:07:02"
+    },
+    {
+      "text": "Identification of data lag issues in February and Postgres replication constraints requiring a dedicated host and infrastructure tuning.",
+      "timestamp": "00:09:04"
+    },
+    {
+      "text": "Shift in defect tracking methodology to measure open bugs exceeding SLOs rather than closed bugs to prevent metric manipulation.",
+      "timestamp": "00:16:47"
+    },
+    {
+      "text": "Narrow MR rate target stabilized at 10, with a strategic pivot toward improving quality, security, and availability metrics.",
+      "timestamp": "00:23:18"
+    }
+  ],
+  "chapters": [
+    {
+      "title": "Meeting Intro & Key Review Rotation Proposal",
+      "start": "00:00:00"
+    },
+    {
+      "title": "R&D MR Rate Metrics Discussion",
+      "start": "00:01:41"
+    },
+    {
+      "title": "Data Lag & Postgres Replication Update",
+      "start": "00:08:59"
+    },
+    {
+      "title": "Defect Tracking & SLO Metrics",
+      "start": "00:13:26"
+    },
+    {
+      "title": "SUS Trends & Narrow MR Rate Context",
+      "start": "00:18:51"
+    },
+    {
+      "title": "Wrap Up",
+      "start": "00:23:55"
+    }
+  ],
+  "decisions": [
+    "Adopt a two-month rotation for department key reviews (Development/Quality one month, Security/UX the next).",
+    "Replace complex R&D wider MR rate metrics with a simplified percentage of total community MRs.",
+    "Shift defect SLO tracking from closed bugs to open bugs exceeding SLO timeframes.",
+    "Hold the narrow MR rate target at 10 and redirect focus toward quality, security, and availability improvements."
+  ],
+  "action_items": [
+    {
+      "text": "Work with Mac to transition the community MR metric to a percentage-based tracking model.",
+      "owner": "Lily"
+    },
+    {
+      "text": "Add an update on the Postgres replication issue to next week's InfraKey review.",
+      "owner": "Steve"
+    },
+    {
+      "text": "Conduct a deeper analysis of the S2 mean time to close spike and provide an update at the next meeting.",
+      "owner": "Christy"
+    },
+    {
+      "text": "Develop and deliver the new open bug SLO percentage metric through the data metrics work stream.",
+      "owner": null
+    }
+  ]
+}
