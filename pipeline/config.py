@@ -24,6 +24,11 @@ ANTHROPIC_MODEL = os.environ.get("CAIC_ANTHROPIC_MODEL", "claude-sonnet-5")
 # The OpenAI-compatible server URL (Tailscale Funnel to the 5090, SETUP.md §7).
 VLLM_BASE_URL = os.environ.get("CAIC_VLLM_BASE_URL", "").rstrip("/")
 
+# Whisper service (Phase 3) — same funnel host as the LLM, /whisper path.
+WHISPER_BASE_URL = os.environ.get(
+    "CAIC_WHISPER_BASE_URL",
+    (VLLM_BASE_URL + "/whisper") if VLLM_BASE_URL else "")
+
 # Shown to the operator when the LLM machine is unreachable.
 OFFLINE_MESSAGE = os.environ.get(
     "CAIC_OFFLINE_MESSAGE",

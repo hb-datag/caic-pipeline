@@ -1,0 +1,7 @@
+faster-whisper
+fastapi
+uvicorn
+python-multipart
+# GPU runtime DLLs for ctranslate2 on Windows (added to PATH by the launcher)
+nvidia-cudnn-cu12
+nvidia-cublas-cu12

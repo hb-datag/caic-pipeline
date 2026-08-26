@@ -31,10 +31,11 @@ def run_job(job_id: str) -> None:
 
         if has_video and not has_transcript:
             st.set_stage(job_id, "transcribe")
-            # TODO(Phase 3): extract audio with ffmpeg, run faster-whisper on a
-            # Modal GPU container, save transcript with word-level timestamps.
-            st.log(job_id, "Transcription not built yet (Phase 3) — "
-                           "no transcript, so stopping after video stages.", "warn")
+            from .transcribe import transcribe_video
+            txt_path = transcribe_video(
+                inputs["video"], log=lambda m: st.log(job_id, m))
+            job["inputs"]["transcript"] = str(txt_path)
+            has_transcript = True
 
         if has_transcript:
             _run_transcript_pipeline(job_id, job)

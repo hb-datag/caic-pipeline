@@ -23,6 +23,7 @@ app = modal.App(APP_NAME)
 #  so the web app stays fast and cheap.)
 cpu_image = (
     modal.Image.debian_slim(python_version="3.12")
+    .apt_install("ffmpeg")  # audio extraction (Phase 3) + stitch (Phase 4)
     .pip_install(
         "fastapi[standard]~=0.115",
         "jinja2~=3.1",
