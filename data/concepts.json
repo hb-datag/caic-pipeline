@@ -5,7 +5,7 @@
       "date": "2026-08-26",
       "title": "Test",
       "slug": "2026-08-26-test",
-      "summary_short": "The meeting convened as a structured comparative evaluation between Nabisco\u2019s Oreo cookies and Aldi\u2019s Benton\u2019s Original Sandwich Creme cookies. Participants systematically tested both products across multiple dimensions,"
+      "summary_short": "The meeting transcript provided for the Cincinnati AI Catalyst appears to be a brief test recording rather than a formal discussion. It consists of a series of short, playful phrases and sound effects logged at specific "
     }
   ],
   "concepts": [
@@ -76,6 +76,24 @@
           "meeting": "2026-08-26-test",
           "snippet": "Oreo uses a firmer vegetable shortening blend that releases from the embossed biscuit! Benton\u2019s uses a slightly softer fondant formulation.",
           "depth": "discussed"
+        }
+      ],
+      "status": "proposed",
+      "last_updated": "2026-08-26"
+    },
+    {
+      "name": "Modular Cellular Architecture",
+      "aliases": [],
+      "initiated": {
+        "date": "2026-08-26",
+        "meeting": "2026-08-26-test"
+      },
+      "mentions": [
+        {
+          "date": "2026-08-26",
+          "meeting": "2026-08-26-test",
+          "snippet": "Cellular, modular, interactive, modular",
+          "depth": "passing"
         }
       ],
       "status": "proposed",
