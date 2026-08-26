@@ -23,15 +23,17 @@ app = modal.App(APP_NAME)
 #  so the web app stays fast and cheap.)
 cpu_image = (
     modal.Image.debian_slim(python_version="3.12")
-    .apt_install("ffmpeg")  # audio extraction (Phase 3) + stitch (Phase 4)
+    .apt_install("ffmpeg", "fonts-dejavu")  # stitch (Phase 4) + slide fonts
     .pip_install(
         "fastapi[standard]~=0.115",
         "jinja2~=3.1",
         "jsonschema~=4.23",
         "requests~=2.32",
+        "pillow~=11.0",
     )
     .add_local_dir("web", remote_path="/root/web")
     .add_local_dir("site_templates", remote_path="/root/site_templates")
+    .add_local_dir("assets", remote_path="/root/assets")
     .add_local_python_source("pipeline")
 )
 
@@ -93,7 +95,7 @@ VLLM_PORT = 8000
         modal.Secret.from_name("caic-github"),  # GITHUB_TOKEN + GITHUB_REPO
         modal.Secret.from_name("caic-llm"),     # CAIC_VLLM_BASE_URL + CAIC_VLLM_MODEL
     ],
-    timeout=60 * 60,  # a full job may take a while once video stages exist
+    timeout=2 * 60 * 60,  # re-encode fallback on a long meeting needs headroom
 )
 def process_job(job_id: str) -> None:
     """Background job runner. Spawned (fire-and-forget) by the RUN endpoint."""
@@ -103,7 +105,12 @@ def process_job(job_id: str) -> None:
 
     from pipeline.runner import run_job
 
-    run_job(job_id)
+    try:
+        run_job(job_id)
+    finally:
+        # Persist artifacts (final.mp4, youtube.txt, transcripts) so the
+        # web endpoint can serve them for download.
+        data_vol.commit()
 
 
 @app.function(
@@ -214,5 +221,22 @@ def web():
     def recent_jobs(passcode: str = ""):
         check_passcode(passcode)
         return {"jobs": st.recent()}
+
+    # Downloadable artifacts (Phase 4): only these exact names are served.
+    _DOWNLOADS = {"final.mp4": "assembly/final.mp4",
+                  "youtube.txt": "youtube.txt",
+                  "transcript.txt": "transcript.txt"}
+
+    @api.get("/api/download/{job_id}/{name}")
+    def download(job_id: str, name: str, passcode: str = ""):
+        check_passcode(passcode)
+        rel = _DOWNLOADS.get(name)
+        if rel is None or "/" in job_id or ".." in job_id:
+            raise HTTPException(404, "unknown file")
+        data_vol.reload()  # see the worker's latest commit
+        path = Path(VOLUME_MOUNT) / "jobs" / job_id / rel
+        if not path.exists():
+            raise HTTPException(404, "not found (job may still be running)")
+        return FileResponse(str(path), filename=f"{job_id}-{name}")
 
     return api

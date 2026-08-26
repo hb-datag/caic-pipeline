@@ -285,8 +285,11 @@ function render(job){
   const names = Object.keys(job.outputs || {});
   if(names.length){
     $("outputs").classList.remove("hidden");
-    $("outputLinks").innerHTML = names.map(n =>
-      `<a href="${job.outputs[n]}" target="_blank" rel="noopener">→ ${escapeHtml(n)}</a>`).join("");
+    $("outputLinks").innerHTML = names.map(n => {
+      let u = job.outputs[n];
+      if(u.startsWith("/api/")) u += `?passcode=${encodeURIComponent(passcode)}`;
+      return `<a href="${u}" target="_blank" rel="noopener">→ ${escapeHtml(n)}</a>`;
+    }).join("");
   }
 }
 

@@ -37,20 +37,39 @@ def run_job(job_id: str) -> None:
             job["inputs"]["transcript"] = str(txt_path)
             has_transcript = True
 
+        analysis_result = meeting = None
         if has_transcript:
-            _run_transcript_pipeline(job_id, job)
+            analysis_result, meeting = _run_transcript_pipeline(job_id, job)
 
-        if has_video:
+        if has_video and analysis_result:
+            from . import video as vid
+
             st.set_stage(job_id, "video-assembly")
-            # TODO(Phase 4): render branded slide, ffmpeg stitch
-            # (intro -> slide -> recording), stream-copy fast path.
-            st.log(job_id, "Video assembly not built yet (Phase 4) — skipping.", "warn")
+            workdir = str(Path(inputs["video"]).parent / "assembly")
+            final, offset, fast = vid.assemble(
+                inputs["video"], job["title"], job["date"],
+                analysis_result["key_points"], workdir,
+                log=lambda m: st.log(job_id, m))
 
             st.set_stage(job_id, "youtube-kit")
-            # TODO(Phase 4): package final mp4 + title/description/chapters.
+            from .github_api import GitHubRepo
+            pages_url = (f"{GitHubRepo().pages_base_url}"
+                         f"/meetings/{meeting['slug']}/")
+            text = vid.build_youtube_text(job["title"], job["date"],
+                                          analysis_result, offset, pages_url)
+            jobdir = Path(inputs["video"]).parent
+            (jobdir / "youtube.txt").write_text(text, encoding="utf-8")
+            # final.mp4 lives in assembly/; expose both via the download API
+            base = f"/api/download/{job_id}"
+            st.add_output(job_id, "YouTube Kit — final video (mp4)",
+                          f"{base}/final.mp4")
+            st.add_output(job_id, "YouTube Kit — title, description, chapters",
+                          f"{base}/youtube.txt")
+            st.log(job_id, "YouTube Kit ready — download, then upload via "
+                           "YouTube Studio (~2 min). Auto-upload comes after "
+                           "the YouTube API audit.")
             # TODO(later): optional videos.insert upload-as-private step, once
             # the CAIC project passes YouTube's API audit.
-            st.log(job_id, "YouTube Kit not built yet (Phase 4) — skipping.", "warn")
 
         st.finish(job_id)
 
@@ -66,7 +85,7 @@ def run_job(job_id: str) -> None:
 # Phase 2: transcript -> analysis -> ledger -> public site
 # ---------------------------------------------------------------------------
 
-def _run_transcript_pipeline(job_id: str, job: dict) -> None:
+def _run_transcript_pipeline(job_id: str, job: dict):
     from . import analysis as an
     from . import ledger as lg
     from . import llm, site
@@ -142,3 +161,4 @@ def _run_transcript_pipeline(job_id: str, job: dict) -> None:
     st.add_output(job_id, "Live summary page", f"{pages}/meetings/{meeting['slug']}/")
     st.add_output(job_id, "Concept tracker", f"{pages}/concepts/")
     st.log(job_id, "GitHub Pages usually refreshes within a minute of the commit.")
+    return result, meeting
