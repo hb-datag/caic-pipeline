@@ -1,5 +1,85 @@
 {
   "schema_version": 1,
-  "meetings": [],
-  "concepts": []
+  "meetings": [
+    {
+      "date": "2026-08-26",
+      "title": "Test",
+      "slug": "2026-08-26-test",
+      "summary_short": "The meeting convened as a structured comparative evaluation between Nabisco\u2019s Oreo cookies and Aldi\u2019s Benton\u2019s Original Sandwich Creme cookies. Participants systematically tested both products across multiple dimensions,"
+    }
+  ],
+  "concepts": [
+    {
+      "name": "Comparative Cookie Evaluation Framework",
+      "aliases": [],
+      "initiated": {
+        "date": "2026-08-26",
+        "meeting": "2026-08-26-test"
+      },
+      "mentions": [
+        {
+          "date": "2026-08-26",
+          "meeting": "2026-08-26-test",
+          "snippet": "Before us lies the ancient, standard-bearer of the realm\u2014Nabisco\u2019s Oreo\u2014and its rising contender from the eastern aisles, the Benton\u2019s Original Sandwich Creme",
+          "depth": "deep-dive"
+        }
+      ],
+      "status": "proposed",
+      "last_updated": "2026-08-26"
+    },
+    {
+      "name": "Structural Integrity & Dunk Testing Protocol",
+      "aliases": [],
+      "initiated": {
+        "date": "2026-08-26",
+        "meeting": "2026-08-26-test"
+      },
+      "mentions": [
+        {
+          "date": "2026-08-26",
+          "meeting": "2026-08-26-test",
+          "snippet": "The structural failure of the Benton\u2019s occurred at precisely 8.4 seconds. A fool\u2019s dunk! The Oreo, however, stands firm",
+          "depth": "deep-dive"
+        }
+      ],
+      "status": "proposed",
+      "last_updated": "2026-08-26"
+    },
+    {
+      "name": "Cost-Efficient Snack Procurement Strategy",
+      "aliases": [],
+      "initiated": {
+        "date": "2026-08-26",
+        "meeting": "2026-08-26-test"
+      },
+      "mentions": [
+        {
+          "date": "2026-08-26",
+          "meeting": "2026-08-26-test",
+          "snippet": "You buy ten packs of Oreos, you\u2019re spending fifty bucks! You buy ten packs of Benton\u2019s, you spend twenty bucks",
+          "depth": "discussed"
+        }
+      ],
+      "status": "proposed",
+      "last_updated": "2026-08-26"
+    },
+    {
+      "name": "Cr\u00e8me Texture & Separation Mechanics",
+      "aliases": [],
+      "initiated": {
+        "date": "2026-08-26",
+        "meeting": "2026-08-26-test"
+      },
+      "mentions": [
+        {
+          "date": "2026-08-26",
+          "meeting": "2026-08-26-test",
+          "snippet": "Oreo uses a firmer vegetable shortening blend that releases from the embossed biscuit! Benton\u2019s uses a slightly softer fondant formulation.",
+          "depth": "discussed"
+        }
+      ],
+      "status": "proposed",
+      "last_updated": "2026-08-26"
+    }
+  ]
 }
