@@ -1,0 +1,67 @@
+{
+  "summary": "The meeting begins with a proposal to restructure the engineering key review into four department-specific sessions on a two-month rotation. This change aims to increase visibility, allow deeper dives into specific areas, and reduce calendar fatigue for stakeholders without adding net new meetings. The team agrees to trial this approach while remaining flexible to adjust frequency based on department size and needs.\n\nA significant portion of the discussion focuses on refining engineering KPIs, particularly around Merge Request (MR) rates. After clarifying the definitions of narrow versus wider MR rates, the group decides to simplify the metric by tracking the percentage of total MRs originating from the community over time. This shift aims to prevent gaming the system and better reflect community health relative to company growth. The team also addresses data lag issues affecting current metrics, assigning infrastructure as the primary owner for resolving Postgres replication constraints through a dedicated host.\n\nFinally, the review covers defect tracking against Service Level Objectives (SLOs) and user satisfaction scores. Feedback is given to pivot defect metrics from measuring closed bugs to tracking open bugs that exceed SLO timelines, ensuring a more accurate view of backlog health. The meeting concludes with an analysis of SUS trends and MR rate targets, agreeing to hold the productivity target steady at 10 while shifting strategic focus toward improving quality, security, and availability indicators.",
+  "key_points": [
+    {
+      "text": "Proposal to split the engineering key review into four department-specific meetings on a two-month rotation to improve depth and reduce calendar load.",
+      "timestamp": "00:00:10"
+    },
+    {
+      "text": "Decision to simplify R&D MR rate KPIs by tracking the percentage of total MRs from the community instead of using complex narrow/wider rate definitions.",
+      "timestamp": "00:07:02"
+    },
+    {
+      "text": "Identification of infrastructure as the DRI for Postgres replication lag, with plans to deploy a dedicated host for data engineering traffic.",
+      "timestamp": "00:10:38"
+    },
+    {
+      "text": "Feedback to adjust defect tracking metrics from measuring closed bugs meeting SLOs to measuring open bugs exceeding SLO timelines.",
+      "timestamp": "00:16:44"
+    },
+    {
+      "text": "Agreement to hold the narrow MR rate target at 10 and shift strategic focus toward quality, security, and availability improvements.",
+      "timestamp": "00:23:18"
+    }
+  ],
+  "chapters": [
+    {
+      "title": "Meeting Restructuring Proposal",
+      "start": "00:00:10"
+    },
+    {
+      "title": "R&D MR Rate KPI Discussion",
+      "start": "00:01:41"
+    },
+    {
+      "title": "Postgres Replication & Data Lag",
+      "start": "00:09:40"
+    },
+    {
+      "title": "Defect Tracking & SLO Metrics",
+      "start": "00:13:26"
+    },
+    {
+      "title": "SUS Scores & MR Rate Targets",
+      "start": "00:18:48"
+    }
+  ],
+  "decisions": [
+    "Implement a two-month rotation for department-specific key reviews instead of adding three new permanent meetings.",
+    "Replace the complex R&D wider/narrow MR rate KPIs with a single metric tracking the percentage of total MRs from the community.",
+    "Hold the narrow MR rate productivity target at 10 and prioritize improvements in quality, security, and availability.",
+    "Adjust defect tracking metrics to focus on the percentage of open bugs exceeding SLOs rather than just closed bugs meeting them."
+  ],
+  "action_items": [
+    {
+      "text": "Work with Mac to transition the MR rate KPI to the new community percentage metric.",
+      "owner": "Lily"
+    },
+    {
+      "text": "Add an update on the Postgres replication issue to next week's InfraKey review.",
+      "owner": "Steve"
+    },
+    {
+      "text": "Conduct a deeper analysis of the S2 mean time to close spike and provide an update at the next meeting.",
+      "owner": null
+    }
+  ]
+}

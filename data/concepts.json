@@ -6,6 +6,12 @@
       "title": "Test",
       "slug": "2026-08-26-test",
       "summary_short": "The meeting transcript provided for the Cincinnati AI Catalyst appears to be a brief test recording rather than a formal discussion. It consists of a series of short, playful phrases and sound effects logged at specific "
+    },
+    {
+      "date": "2026-08-26",
+      "title": "Test-2",
+      "slug": "2026-08-26-test-2",
+      "summary_short": "The meeting begins with a proposal to restructure the engineering key review into four department-specific sessions on a two-month rotation. This change aims to increase visibility, allow deeper dives into specific areas"
     }
   ],
   "concepts": [
@@ -94,6 +100,96 @@
           "meeting": "2026-08-26-test",
           "snippet": "Cellular, modular, interactive, modular",
           "depth": "passing"
+        }
+      ],
+      "status": "proposed",
+      "last_updated": "2026-08-26"
+    },
+    {
+      "name": "Simplified Community MR Metric",
+      "aliases": [],
+      "initiated": {
+        "date": "2026-08-26",
+        "meeting": "2026-08-26-test-2"
+      },
+      "mentions": [
+        {
+          "date": "2026-08-26",
+          "meeting": "2026-08-26-test-2",
+          "snippet": "what if we just tracked as a KPI the percentage of total MRs that come from the community over time?",
+          "depth": "deep-dive"
+        }
+      ],
+      "status": "proposed",
+      "last_updated": "2026-08-26"
+    },
+    {
+      "name": "Postgres Replication Optimization",
+      "aliases": [],
+      "initiated": {
+        "date": "2026-08-26",
+        "meeting": "2026-08-26-test-2"
+      },
+      "mentions": [
+        {
+          "date": "2026-08-26",
+          "meeting": "2026-08-26-test-2",
+          "snippet": "separating out and having a dedicated host so that we're just dealing with the profile of the data engineering traffic",
+          "depth": "discussed"
+        }
+      ],
+      "status": "proposed",
+      "last_updated": "2026-08-26"
+    },
+    {
+      "name": "Open Bug SLO Tracking",
+      "aliases": [],
+      "initiated": {
+        "date": "2026-08-26",
+        "meeting": "2026-08-26-test-2"
+      },
+      "mentions": [
+        {
+          "date": "2026-08-26",
+          "meeting": "2026-08-26-test-2",
+          "snippet": "What I'm proposing is, of the open bugs, what percentage is outside of SLO.",
+          "depth": "deep-dive"
+        }
+      ],
+      "status": "proposed",
+      "last_updated": "2026-08-26"
+    },
+    {
+      "name": "Engineering Productivity Targeting",
+      "aliases": [],
+      "initiated": {
+        "date": "2026-08-26",
+        "meeting": "2026-08-26-test-2"
+      },
+      "mentions": [
+        {
+          "date": "2026-08-26",
+          "meeting": "2026-08-26-test-2",
+          "snippet": "hold the line at productivity, but start to raise other things related to quality, security, availability",
+          "depth": "discussed"
+        }
+      ],
+      "status": "proposed",
+      "last_updated": "2026-08-26"
+    },
+    {
+      "name": "System Usability Scale Improvement",
+      "aliases": [],
+      "initiated": {
+        "date": "2026-08-26",
+        "meeting": "2026-08-26-test-2"
+      },
+      "mentions": [
+        {
+          "date": "2026-08-26",
+          "meeting": "2026-08-26-test-2",
+          "snippet": "We have had a much keener focus on SUS over the past several quarters.",
+          "depth": "discussed"
         }
       ],
       "status": "proposed",
