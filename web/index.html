@@ -104,6 +104,10 @@
     <p class="hint">Provide a video, a transcript, or both. Video-only runs are transcribed automatically.</p>
     <div class="error hidden" id="formError"></div>
     <p style="margin-top:1rem"><button class="gold" id="runBtn">RUN</button></p>
+    <div id="recent" class="hidden">
+      <h2 style="margin-top:1.4rem">Recent runs</h2>
+      <div id="recentList" style="font-size:.88rem"></div>
+    </div>
   </div>
 
   <!-- status feed -->
@@ -144,6 +148,8 @@ let pollTimer = null;
 // ------------------------- API (real + demo) -------------------------------
 const realApi = {
   async ping(p){ const r = await fetch(`/api/ping?passcode=${encodeURIComponent(p)}`); return r.ok; },
+  async jobs(){ const r = await fetch(`/api/jobs?passcode=${encodeURIComponent(passcode)}`);
+    return r.ok ? (await r.json()).jobs : []; },
   async run(formData){ const r = await fetch("/api/run",{method:"POST",body:formData});
     if(!r.ok){ throw new Error((await r.json().catch(()=>({detail:r.statusText}))).detail); }
     return (await r.json()).job_id; },
@@ -166,6 +172,8 @@ const demoApi = (() => {
   ];
   return {
     async ping(p){ return p.length > 0; },
+    async jobs(){ return [{id:"demo-old", title:"Previous Demo Meeting",
+                           date:"2026-08-01", state:"done"}]; },
     async run(fd){
       job = { id:"demo-job", title: fd.get("title") || "Demo Meeting", state:"running",
               stage:"queued", events:[{t:Date.now()/1000,level:"info",msg:"Job created (demo)"}], outputs:{} };
@@ -199,9 +207,29 @@ async function tryEnter(p){
   if(await api.ping(p)){
     passcode = p; sessionStorage.setItem("caic_pass", p);
     $("gateCard").classList.add("hidden"); $("formCard").classList.remove("hidden");
+    loadRecent();
     return true;
   }
   return false;
+}
+
+async function loadRecent(){
+  const jobs = await api.jobs().catch(()=>[]);
+  if(!jobs.length) return;
+  $("recent").classList.remove("hidden");
+  $("recentList").innerHTML = jobs.slice(0,8).map(j =>
+    `<div><a href="#" data-id="${j.id}" data-title="${escapeHtml(j.title)}">
+       ${j.date} — ${escapeHtml(j.title)}</a>
+       <span class="state-pill state-${j.state}">${j.state}</span></div>`).join("");
+  $("recentList").querySelectorAll("a").forEach(a => a.onclick = e => {
+    e.preventDefault();
+    openJob(a.dataset.id, a.dataset.title);
+  });
+}
+
+function openJob(jobId, title){
+  showStatus(title);
+  poll(jobId);   // one fetch renders it; polling stops on done/error
 }
 $("gateBtn").onclick = async () => {
   if(!await tryEnter($("passcode").value)) $("gateError").classList.remove("hidden");
@@ -296,15 +324,18 @@ function render(job){
 function escapeHtml(s){ const d=document.createElement("div"); d.textContent=s; return d.innerHTML; }
 
 $("newRunBtn").onclick = () => {
+  clearInterval(pollTimer);
   $("statusCard").classList.add("hidden");
   $("formCard").classList.remove("hidden");
   $("video").value = ""; $("transcriptFile").value = ""; $("transcriptText").value = "";
+  loadRecent();
 };
 
 // ------------------------- resume on reload --------------------------------
 (async () => {
   if(passcode && await api.ping(passcode).catch(()=>false)){
     $("gateCard").classList.add("hidden"); $("formCard").classList.remove("hidden");
+    loadRecent();
     const jobId = sessionStorage.getItem("caic_job");
     if(jobId && !DEMO){
       try{ const job = await api.status(jobId); showStatus(job.title); render(job);

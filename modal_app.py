@@ -146,7 +146,9 @@ def web():
     # ---- routes --------------------------------------------------------
     @api.get("/")
     def index():
-        return FileResponse("/root/web/index.html")
+        # no-store: operators must always get the freshly deployed page
+        return FileResponse("/root/web/index.html",
+                            headers={"Cache-Control": "no-store"})
 
     @api.get("/api/ping")
     def ping(passcode: str = ""):
