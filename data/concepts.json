@@ -18,6 +18,12 @@
       "title": "Test-3",
       "slug": "2026-08-26-test-3",
       "summary_short": "The meeting focused on restructuring the engineering key review process and refining several core performance metrics. Eric Johnson proposed splitting the current combined review into four department-specific sessions (D"
+    },
+    {
+      "date": "2026-09-01",
+      "title": "Test Transcipt only",
+      "slug": "2026-09-01-test-transcipt-only",
+      "summary_short": "The meeting begins with technical difficulties as Moe, Larry, and Curly connect via Zoom to debate which coffee is the best. Moe immediately advocates for a strong dark roast served black, while Curly champions instant c"
     }
   ],
   "concepts": [
@@ -36,7 +42,7 @@
           "depth": "deep-dive"
         }
       ],
-      "status": "proposed",
+      "status": "dormant",
       "last_updated": "2026-08-26"
     },
     {
@@ -54,7 +60,7 @@
           "depth": "deep-dive"
         }
       ],
-      "status": "proposed",
+      "status": "dormant",
       "last_updated": "2026-08-26"
     },
     {
@@ -72,7 +78,7 @@
           "depth": "discussed"
         }
       ],
-      "status": "proposed",
+      "status": "dormant",
       "last_updated": "2026-08-26"
     },
     {
@@ -90,7 +96,7 @@
           "depth": "discussed"
         }
       ],
-      "status": "proposed",
+      "status": "dormant",
       "last_updated": "2026-08-26"
     },
     {
@@ -108,7 +114,7 @@
           "depth": "passing"
         }
       ],
-      "status": "proposed",
+      "status": "dormant",
       "last_updated": "2026-08-26"
     },
     {
@@ -290,6 +296,96 @@
       ],
       "status": "proposed",
       "last_updated": "2026-08-26"
+    },
+    {
+      "name": "Dark Roast Preference",
+      "aliases": [],
+      "initiated": {
+        "date": "2026-09-01",
+        "meeting": "2026-09-01-test-transcipt-only"
+      },
+      "mentions": [
+        {
+          "date": "2026-09-01",
+          "meeting": "2026-09-01-test-transcipt-only",
+          "snippet": "Dark roast. French roast. Black as a coal miner\u2019s lunchbox. You want coffee that wakes you up, not asks you about your feelings.",
+          "depth": "deep-dive"
+        }
+      ],
+      "status": "proposed",
+      "last_updated": "2026-09-01"
+    },
+    {
+      "name": "Instant Coffee Convenience",
+      "aliases": [],
+      "initiated": {
+        "date": "2026-09-01",
+        "meeting": "2026-09-01-test-transcipt-only"
+      },
+      "mentions": [
+        {
+          "date": "2026-09-01",
+          "meeting": "2026-09-01-test-transcipt-only",
+          "snippet": "Instant coffee, boys! Soitenly! You just add hot water, stir it with your finger, and boom! You\u2019re caffeinated before you can say \u201cspread out!\u201d",
+          "depth": "discussed"
+        }
+      ],
+      "status": "proposed",
+      "last_updated": "2026-09-01"
+    },
+    {
+      "name": "Simultaneous Tasting Experiment",
+      "aliases": [],
+      "initiated": {
+        "date": "2026-09-01",
+        "meeting": "2026-09-01-test-transcipt-only"
+      },
+      "mentions": [
+        {
+          "date": "2026-09-01",
+          "meeting": "2026-09-01-test-transcipt-only",
+          "snippet": "Why don\u2019t we each prepare our preferred brew and conduct a simultaneous tasting?",
+          "depth": "deep-dive"
+        }
+      ],
+      "status": "proposed",
+      "last_updated": "2026-09-01"
+    },
+    {
+      "name": "Fancy Coffee Nomenclature Critique",
+      "aliases": [],
+      "initiated": {
+        "date": "2026-09-01",
+        "meeting": "2026-09-01-test-transcipt-only"
+      },
+      "mentions": [
+        {
+          "date": "2026-09-01",
+          "meeting": "2026-09-01-test-transcipt-only",
+          "snippet": "A \u201cventi half-caf oat milk caramel drizzle\u201d is less a beverage and more a hostage negotiation.",
+          "depth": "discussed"
+        }
+      ],
+      "status": "proposed",
+      "last_updated": "2026-09-01"
+    },
+    {
+      "name": "Coffee as Social Ritual",
+      "aliases": [],
+      "initiated": {
+        "date": "2026-09-01",
+        "meeting": "2026-09-01-test-transcipt-only"
+      },
+      "mentions": [
+        {
+          "date": "2026-09-01",
+          "meeting": "2026-09-01-test-transcipt-only",
+          "snippet": "What if the best coffee\u2026 is the one you drink with company? Even if that company is currently vibrating through a webcam?",
+          "depth": "passing"
+        }
+      ],
+      "status": "proposed",
+      "last_updated": "2026-09-01"
     }
   ]
 }
