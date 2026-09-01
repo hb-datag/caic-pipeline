@@ -57,7 +57,7 @@ guides/            Human documentation: setup, runbook, redeploy guide
 | 4 | Branded slide + FFmpeg stitch + YouTube Kit + downloads | **live** |
 | 5 | Operator runbook (`guides/RUNBOOK.md`) + successor guide (`guides/REDEPLOY.md`) | **done** |
 
-Public site: **https://caic.datag.co** (also at hb-datag.github.io/caic-pipeline).
+Public site: **https://caic.xtainable.com** (also at hb-datag.github.io/caic-pipeline).
 Operator page: https://hb-datag--caic-pipeline-web.modal.run
 
 ## Quickstart

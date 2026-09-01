@@ -41,7 +41,7 @@ SITE_DIR = "docs"  # GitHub Pages serves from /docs on main
 
 # Public URL of the site. Set to the custom domain; empty string falls back
 # to the default <owner>.github.io/<repo> URL derived from GITHUB_REPO.
-PAGES_URL = os.environ.get("CAIC_PAGES_URL", "https://caic.datag.co")
+PAGES_URL = os.environ.get("CAIC_PAGES_URL", "https://caic.xtainable.com")
 
 # YouTube auto-upload (post-audit): "on" only after the CAIC Google Cloud
 # project passes YouTube's API audit AND the caic-youtube secret exists
