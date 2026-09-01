@@ -3,6 +3,12 @@
   "meetings": [
     {
       "date": "2026-09-01",
+      "title": "Test Live",
+      "slug": "2026-09-01-test-live",
+      "summary_short": "The meeting focused on restructuring the engineering key review process and refining several core performance metrics. Eric Johnson proposed splitting the current combined review into four department-specific sessions co"
+    },
+    {
+      "date": "2026-09-01",
       "title": "Test Transcipt only",
       "slug": "2026-09-01-test-transcipt-only",
       "summary_short": "The meeting begins with technical difficulties as Moe, Larry, and Curly connect via Zoom to debate which coffee is the best. Moe immediately advocates for a strong dark roast served black, while Curly champions instant c"
@@ -94,6 +100,96 @@
           "meeting": "2026-09-01-test-transcipt-only",
           "snippet": "What if the best coffee\u2026 is the one you drink with company? Even if that company is currently vibrating through a webcam?",
           "depth": "passing"
+        }
+      ],
+      "status": "proposed",
+      "last_updated": "2026-09-01"
+    },
+    {
+      "name": "Rotating Department Key Reviews",
+      "aliases": [],
+      "initiated": {
+        "date": "2026-09-01",
+        "meeting": "2026-09-01-test-live"
+      },
+      "mentions": [
+        {
+          "date": "2026-09-01",
+          "meeting": "2026-09-01-test-live",
+          "snippet": "proposal to break up this meeting into four department key reviews",
+          "depth": "discussed"
+        }
+      ],
+      "status": "proposed",
+      "last_updated": "2026-09-01"
+    },
+    {
+      "name": "Community Contribution KPI Simplification",
+      "aliases": [],
+      "initiated": {
+        "date": "2026-09-01",
+        "meeting": "2026-09-01-test-live"
+      },
+      "mentions": [
+        {
+          "date": "2026-09-01",
+          "meeting": "2026-09-01-test-live",
+          "snippet": "what if we just tracked as a KPI the percentage of total MRs that come from the community over time?",
+          "depth": "deep-dive"
+        }
+      ],
+      "status": "proposed",
+      "last_updated": "2026-09-01"
+    },
+    {
+      "name": "Postgres Replication Optimization",
+      "aliases": [],
+      "initiated": {
+        "date": "2026-09-01",
+        "meeting": "2026-09-01-test-live"
+      },
+      "mentions": [
+        {
+          "date": "2026-09-01",
+          "meeting": "2026-09-01-test-live",
+          "snippet": "creating another dedicated host just for the data team to pull from.",
+          "depth": "discussed"
+        }
+      ],
+      "status": "proposed",
+      "last_updated": "2026-09-01"
+    },
+    {
+      "name": "Open Bug SLO Tracking",
+      "aliases": [],
+      "initiated": {
+        "date": "2026-09-01",
+        "meeting": "2026-09-01-test-live"
+      },
+      "mentions": [
+        {
+          "date": "2026-09-01",
+          "meeting": "2026-09-01-test-live",
+          "snippet": "I think we should be looking at open bugs. The entire population or percentage of those is within the SLO time.",
+          "depth": "deep-dive"
+        }
+      ],
+      "status": "proposed",
+      "last_updated": "2026-09-01"
+    },
+    {
+      "name": "Productivity Target Realignment",
+      "aliases": [],
+      "initiated": {
+        "date": "2026-09-01",
+        "meeting": "2026-09-01-test-live"
+      },
+      "mentions": [
+        {
+          "date": "2026-09-01",
+          "meeting": "2026-09-01-test-live",
+          "snippet": "hold the line at productivity, but start to raise other things related to quality, security, availability, and whatnot.",
+          "depth": "discussed"
         }
       ],
       "status": "proposed",
