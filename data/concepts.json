@@ -12,6 +12,12 @@
       "title": "Test Transcipt only",
       "slug": "2026-09-01-test-transcipt-only",
       "summary_short": "The meeting begins with technical difficulties as Moe, Larry, and Curly connect via Zoom to debate which coffee is the best. Moe immediately advocates for a strong dark roast served black, while Curly champions instant c"
+    },
+    {
+      "date": "2026-09-15",
+      "title": "Test915",
+      "slug": "2026-09-15-test915",
+      "summary_short": "The meeting focused on restructuring GitLab\u2019s engineering key reviews and refining several core performance metrics. Eric Johnson proposed splitting the current combined review into four department-specific sessions (Dev"
     }
   ],
   "concepts": [
@@ -118,10 +124,16 @@
           "meeting": "2026-09-01-test-live",
           "snippet": "proposal to break up this meeting into four department key reviews",
           "depth": "discussed"
+        },
+        {
+          "date": "2026-09-15",
+          "meeting": "2026-09-15-test915",
+          "snippet": "I propose we do a sort of two-month rotation. So month one, development, quality, go.",
+          "depth": "discussed"
         }
       ],
-      "status": "proposed",
-      "last_updated": "2026-09-01"
+      "status": "active",
+      "last_updated": "2026-09-15"
     },
     {
       "name": "Community Contribution KPI Simplification",
@@ -136,10 +148,16 @@
           "meeting": "2026-09-01-test-live",
           "snippet": "what if we just tracked as a KPI the percentage of total MRs that come from the community over time?",
           "depth": "deep-dive"
+        },
+        {
+          "date": "2026-09-15",
+          "meeting": "2026-09-15-test915",
+          "snippet": "what if we just tracked as a KPI the percentage of total MRs that come from the community over time?",
+          "depth": "deep-dive"
         }
       ],
-      "status": "proposed",
-      "last_updated": "2026-09-01"
+      "status": "active",
+      "last_updated": "2026-09-15"
     },
     {
       "name": "Postgres Replication Optimization",
@@ -154,10 +172,16 @@
           "meeting": "2026-09-01-test-live",
           "snippet": "creating another dedicated host just for the data team to pull from.",
           "depth": "discussed"
+        },
+        {
+          "date": "2026-09-15",
+          "meeting": "2026-09-15-test915",
+          "snippet": "having a dedicated host that doesn't have conflicting query traffic coming from other workloads.",
+          "depth": "discussed"
         }
       ],
-      "status": "proposed",
-      "last_updated": "2026-09-01"
+      "status": "active",
+      "last_updated": "2026-09-15"
     },
     {
       "name": "Open Bug SLO Tracking",
@@ -172,10 +196,16 @@
           "meeting": "2026-09-01-test-live",
           "snippet": "I think we should be looking at open bugs. The entire population or percentage of those is within the SLO time.",
           "depth": "deep-dive"
+        },
+        {
+          "date": "2026-09-15",
+          "meeting": "2026-09-15-test915",
+          "snippet": "I think we should be looking at open bugs. The entire population or percentage of those is within the SLO time.",
+          "depth": "deep-dive"
         }
       ],
-      "status": "proposed",
-      "last_updated": "2026-09-01"
+      "status": "active",
+      "last_updated": "2026-09-15"
     },
     {
       "name": "Productivity Target Realignment",
@@ -190,10 +220,34 @@
           "meeting": "2026-09-01-test-live",
           "snippet": "hold the line at productivity, but start to raise other things related to quality, security, availability, and whatnot.",
           "depth": "discussed"
+        },
+        {
+          "date": "2026-09-15",
+          "meeting": "2026-09-15-test915",
+          "snippet": "hold the line at productivity, but start to raise other things related to quality, security, availability",
+          "depth": "discussed"
+        }
+      ],
+      "status": "active",
+      "last_updated": "2026-09-15"
+    },
+    {
+      "name": "SUS Metric Improvement",
+      "aliases": [],
+      "initiated": {
+        "date": "2026-09-15",
+        "meeting": "2026-09-15-test915"
+      },
+      "mentions": [
+        {
+          "date": "2026-09-15",
+          "meeting": "2026-09-15-test915",
+          "snippet": "We have had a much keener focus on SUS over the past several quarters.",
+          "depth": "discussed"
         }
       ],
       "status": "proposed",
-      "last_updated": "2026-09-01"
+      "last_updated": "2026-09-15"
     }
   ]
 }

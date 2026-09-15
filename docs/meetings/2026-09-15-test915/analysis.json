@@ -1,0 +1,71 @@
+{
+  "summary": "The meeting focused on restructuring GitLab\u2019s engineering key reviews and refining several core performance metrics. Eric Johnson proposed splitting the current combined review into four department-specific sessions (Development, Quality, Security, and UX) running on a two-month rotation to prevent calendar overload while allowing deeper dives into each area. The team agreed to trial this rotational approach with flexibility to adjust frequency based on department size and needs.\n\nA significant portion of the discussion centered on simplifying and improving KPI tracking. The group decided to replace complex merge request rate metrics with a straightforward percentage of total MRs originating from the community, aiming for clearer visibility into external contributions. Additionally, defect tracking was addressed, with a consensus to shift SLO measurements from closed bugs to open bugs to prevent metric gaming and better reflect backlog health. Infrastructure updates highlighted ongoing efforts to resolve data replication lag by provisioning a dedicated host for the data team.\n\nFinally, the team reviewed productivity targets and user satisfaction trends. The narrow MR rate target was officially set at 10, with leadership emphasizing a strategic pivot toward enhancing quality, security, and system availability rather than pushing for higher merge request volumes. SUS scores showed a stabilizing trend with the smallest quarterly decline in recent months, prompting cautious optimism as the team continues to monitor underlying metric accuracy and backlog clearance efforts.",
+  "key_points": [
+    {
+      "text": "Proposal to rotate department key reviews bi-monthly to avoid adding net new meetings to stakeholder calendars.",
+      "timestamp": "00:00:51"
+    },
+    {
+      "text": "Agreement to simplify community contribution tracking by measuring the percentage of total MRs from the community instead of complex rate metrics.",
+      "timestamp": "00:07:02"
+    },
+    {
+      "text": "Identification of a four-day data lag issue, with plans to provision a dedicated host for the data team to resolve replication conflicts.",
+      "timestamp": "00:09:04"
+    },
+    {
+      "text": "Consensus to shift defect SLO tracking from closed bugs to open bugs to prevent gaming and accurately reflect backlog health.",
+      "timestamp": "00:16:44"
+    },
+    {
+      "text": "Narrow MR rate target set at 10, with a strategic shift toward improving quality, security, and availability over raw productivity.",
+      "timestamp": "00:23:18"
+    }
+  ],
+  "chapters": [
+    {
+      "title": "Meeting Restructuring Proposal",
+      "start": "00:00:10"
+    },
+    {
+      "title": "Community MR Rate KPI Simplification",
+      "start": "00:01:41"
+    },
+    {
+      "title": "Data Lag and Postgres Replication Updates",
+      "start": "00:08:59"
+    },
+    {
+      "title": "Defect Tracking and SLO Metrics Refinement",
+      "start": "00:13:14"
+    },
+    {
+      "title": "SUS Trends and Narrow MR Rate Targets",
+      "start": "00:18:32"
+    }
+  ],
+  "decisions": [
+    "Adopt a two-month rotation for department key reviews (Development/Quality vs Security/UX).",
+    "Replace complex R&D wider MR rate KPI with the percentage of total MRs from the community.",
+    "Set the narrow MR rate target at 10 and shift focus to quality, security, and availability.",
+    "Shift defect SLO measurement to track open bugs rather than closed bugs."
+  ],
+  "action_items": [
+    {
+      "text": "Work with Mac to transition the KPI to track percentage of community MRs.",
+      "owner": "Lily"
+    },
+    {
+      "text": "Add an update on the Postgres replication issue to next week's InfraKey review.",
+      "owner": "Steve"
+    },
+    {
+      "text": "Take the open bug SLO metric proposal to the next data metrics workstream.",
+      "owner": null
+    },
+    {
+      "text": "Investigate and resolve the four-day lag in updated metrics.",
+      "owner": null
+    }
+  ]
+}
