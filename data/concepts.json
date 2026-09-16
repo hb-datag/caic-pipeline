@@ -15,6 +15,12 @@
     },
     {
       "date": "2026-09-15",
+      "title": "Q3",
+      "slug": "2026-09-15-q3",
+      "summary_short": "The meeting opened with operational reminders, including an upcoming book club discussion on \"Inspired,\" a push for product managers to follow up on customer interview contacts provided by CS and Sales, and fixes for eng"
+    },
+    {
+      "date": "2026-09-15",
       "title": "Test915",
       "slug": "2026-09-15-test915",
       "summary_short": "The meeting focused on restructuring GitLab\u2019s engineering key reviews and refining several core performance metrics. Eric Johnson proposed splitting the current combined review into four department-specific sessions (Dev"
@@ -243,6 +249,96 @@
           "date": "2026-09-15",
           "meeting": "2026-09-15-test915",
           "snippet": "We have had a much keener focus on SUS over the past several quarters.",
+          "depth": "discussed"
+        }
+      ],
+      "status": "proposed",
+      "last_updated": "2026-09-15"
+    },
+    {
+      "name": "Kickoff Meeting Format Revamp",
+      "aliases": [],
+      "initiated": {
+        "date": "2026-09-15",
+        "meeting": "2026-09-15-q3"
+      },
+      "mentions": [
+        {
+          "date": "2026-09-15",
+          "meeting": "2026-09-15-q3",
+          "snippet": "we're gonna have to rethink of how we're doing the kickoff because we're gonna have next month we're gonna have 25 people",
+          "depth": "deep-dive"
+        }
+      ],
+      "status": "proposed",
+      "last_updated": "2026-09-15"
+    },
+    {
+      "name": "Product Discovery Sprints",
+      "aliases": [],
+      "initiated": {
+        "date": "2026-09-15",
+        "meeting": "2026-09-15-q3"
+      },
+      "mentions": [
+        {
+          "date": "2026-09-15",
+          "meeting": "2026-09-15-q3",
+          "snippet": "the product discovery sprint is more focused on actually building something iterating on it and trying to get to some sort of mvc quickly",
+          "depth": "deep-dive"
+        }
+      ],
+      "status": "proposed",
+      "last_updated": "2026-09-15"
+    },
+    {
+      "name": "Proactive Performance & Scalability Strategy",
+      "aliases": [],
+      "initiated": {
+        "date": "2026-09-15",
+        "meeting": "2026-09-15-q3"
+      },
+      "mentions": [
+        {
+          "date": "2026-09-15",
+          "meeting": "2026-09-15-q3",
+          "snippet": "i think performance should be somewhere incorporated um as we move forward and something we should be thinking about for scalability across the board",
+          "depth": "deep-dive"
+        }
+      ],
+      "status": "proposed",
+      "last_updated": "2026-09-15"
+    },
+    {
+      "name": "Dual Track Agile Implementation",
+      "aliases": [],
+      "initiated": {
+        "date": "2026-09-15",
+        "meeting": "2026-09-15-q3"
+      },
+      "mentions": [
+        {
+          "date": "2026-09-15",
+          "meeting": "2026-09-15-q3",
+          "snippet": "we're leveraging a semi dual track agile approach to organize how we open issues for areas that need a discovery beat versus delivery",
+          "depth": "discussed"
+        }
+      ],
+      "status": "proposed",
+      "last_updated": "2026-09-15"
+    },
+    {
+      "name": "Internal vs External Feedback Balance",
+      "aliases": [],
+      "initiated": {
+        "date": "2026-09-15",
+        "meeting": "2026-09-15-q3"
+      },
+      "mentions": [
+        {
+          "date": "2026-09-15",
+          "meeting": "2026-09-15-q3",
+          "snippet": "the handbook basically read that internal feedback is worth 10 times more than external feedback and i understand why we want internal feedback",
           "depth": "discussed"
         }
       ],

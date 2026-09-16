@@ -1,0 +1,82 @@
+{
+  "summary": "The meeting opened with operational reminders, including an upcoming book club discussion on \"Inspired,\" a push for product managers to follow up on customer interview contacts provided by CS and Sales, and fixes for engagement survey distribution issues. Leadership announced two new PM hires, Gabe Weaver and Dove Hirschkiewicz, and clarified recent handbook language changes regarding dogfooding. The team aligned that while internal teams should be treated as early customers for feedback, external customer input must remain the primary priority to avoid misaligned messaging.\n\nSignificant time was dedicated to reviewing the recent 12.2 kickoff meeting. Participants noted a need for more visual mockups, problem-focused pitches, and stricter time limits per speaker due to growing content volume. The group agreed to create an issue to revamp the kickoff format before next month's release, potentially exploring thematic grouping or recorded deep-dives. Additionally, Sarah O'Donnell\u2019s team is preparing quick customer discovery training videos that will be embedded on the team page.\n\nThe discussion shifted to recent .com outages and performance bottlenecks, particularly around Redis caching and unit test loads. Leadership emphasized the need for proactive scalability planning, suggesting that performance metrics and cost implications should be integrated into the definition of done. Finally, Karina presented a handbook update proposing a dual-track agile approach to better scope oversized features, incorporate discovery beats, and improve overall delivery rates before committing to release cycles.",
+  "key_points": [
+    {
+      "text": "Reminders were shared regarding the upcoming book club, customer interview follow-ups, and fixing engagement survey distribution for missed recipients.",
+      "timestamp": "00:00:27"
+    },
+    {
+      "text": "Two new product managers, Gabe Weaver and Dove Hirschkiewicz, were hired to lead/manage teams in the Manage and Monitoring areas respectively.",
+      "timestamp": "00:04:52"
+    },
+    {
+      "text": "Feedback on the 12.2 kickoff highlighted the need for better mockups, problem-focused pitches, and a decision to revamp the meeting format before next month.",
+      "timestamp": "10:29"
+    },
+    {
+      "text": "Recent .com outages and Redis performance bottlenecks underscored the need for proactive scalability planning and incorporating performance into the definition of done.",
+      "timestamp": "26:12"
+    },
+    {
+      "text": "A dual-track agile approach was proposed in a handbook update to improve release scoping, handle oversized features, and increase delivery rates.",
+      "timestamp": "38:35"
+    }
+  ],
+  "chapters": [
+    {
+      "title": "Reminders & Survey Updates",
+      "start": "00:00:13"
+    },
+    {
+      "title": "Hiring Updates & Handbook Clarifications",
+      "start": "00:04:45"
+    },
+    {
+      "title": "Kickoff Meeting Feedback & Format Revamp",
+      "start": "09:51"
+    },
+    {
+      "title": "Product Discovery Sprints Experiment",
+      "start": "21:58"
+    },
+    {
+      "title": "Outages, Performance & Scalability Planning",
+      "start": "26:12"
+    },
+    {
+      "title": "Handbook Updates & Dual-Track Agile Process",
+      "start": "38:35"
+    }
+  ],
+  "decisions": [
+    "Revamp the kickoff meeting format prior to next month's release to address time constraints and growing content volume.",
+    "Rename the 'promise' label to 'playing priority' to better reflect external dependencies without overcommitting.",
+    "Clarify handbook language to treat internal teams as customers for dogfooding while ensuring external customer feedback remains prioritized."
+  ],
+  "action_items": [
+    {
+      "text": "Resend the engagement survey link to Fabian and Carina.",
+      "owner": "Jessica"
+    },
+    {
+      "text": "Update the OKR issue to track progress toward the goal of three customer interviews per PM.",
+      "owner": null
+    },
+    {
+      "text": "Review and confirm or update forecasts on the category maturity page.",
+      "owner": null
+    },
+    {
+      "text": "Create an issue to discuss alternatives for the kickoff meeting format.",
+      "owner": null
+    },
+    {
+      "text": "Share findings and lessons learned from the product discovery sprint experiment.",
+      "owner": "James"
+    },
+    {
+      "text": "Continue refining the product handbook MR regarding self-organization and dual-track agile processes.",
+      "owner": "Karina"
+    }
+  ]
+}
